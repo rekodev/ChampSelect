@@ -1,0 +1,28 @@
+@font-face {
+  font-family: FF-Mark;
+  src: url(./Fonts/FF-Mark.otf);
+}
+
+footer .footer-container {
+  color: #fff;
+  max-width: 1084px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  font-family: FF-Mark;
+}
+
+.footer-container .reko {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-container .reko a {
+  text-decoration: none;
+  color: #fff;
+}

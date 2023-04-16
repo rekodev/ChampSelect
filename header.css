@@ -1,0 +1,30 @@
+@font-face {
+  font-family: FF-Mark;
+  src: url(./Fonts/FF-Mark.otf);
+}
+
+header .header-container {
+  max-width: 1084px;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-container .logo {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-container .logo p,
+.header-container a {
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: FF-Mark;
+  color: #fff;
+  text-decoration: none;
+}

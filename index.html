@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChampSelect</title>
+    <link rel="stylesheet" href="./css-variables.css" />
+    <link rel="stylesheet" href="./header.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./champion-info.css" />
+    <link rel="stylesheet" href="./footer.css" />
+    <script src="./script.js" defer></script>
+
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="background-img">
+      <div class="background-img-cover"></div>
+    </div>
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="league"
+            width="30"
+            height="32"
+            viewBox="0 0 30 32"
+            fill="none"
+          >
+            <g>
+              <path
+                d="M1.80644 9.75049C0.655032 11.8373 0 14.2271 0 16.7683C0 19.3095 0.655032 21.7015 1.80644 23.7883V9.75049Z"
+                fill="#C28F2C"
+              ></path>
+              <path
+                d="M15 2.02222C13.7829 2.02222 12.602 2.16921 11.4688 2.43647V4.75718C12.5907 4.44093 13.7738 4.26721 15 4.26721C22.0218 4.26721 27.7153 9.84627 27.7153 16.7305C27.7153 19.8307 26.5571 22.6659 24.6464 24.8463L24.2838 26.118L23.4814 28.9331C27.4184 26.2761 30.0023 21.8195 30.0023 16.7705C30 8.62355 23.2843 2.02222 15 2.02222Z"
+                fill="#C28F2C"
+              ></path>
+              <path
+                d="M11.4688 24.4209H22.9737H23.2253C25.1723 22.4209 26.3713 19.7126 26.3713 16.7305C26.3713 10.5746 21.2806 5.58569 15 5.58569C13.767 5.58569 12.5816 5.78168 11.4688 6.1358V24.4209Z"
+                fill="#C28F2C"
+              ></path>
+              <path
+                d="M10.1088 0H1.55029L3.16634 3.29844V28.7038L1.55029 32H21.1922L22.9737 25.7572H10.1088V0Z"
+                fill="#C28F2C"
+              ></path>
+            </g>
+          </svg>
+          <p>ChampSelect</p>
+        </div>
+        <a href="">Rest API</a>
+      </div>
+    </header>
+    <main>
+      <section>
+        <div class="search-bar">
+          <input type="text" placeholder="Search" />
+          <i class="fa-solid fa-search"></i>
+          <div class="types">
+            <div class="type" id="assassin"></div>
+            <div class="type" id="fighter"></div>
+            <div class="type" id="mage"></div>
+            <div class="type" id="marksman"></div>
+            <div class="type" id="support"></div>
+            <div class="type" id="tank"></div>
+          </div>
+
+          <div class="roles">
+            <div class="role" id="top"></div>
+            <div class="role" id="jungle"></div>
+            <div class="role" id="middle"></div>
+            <div class="role" id="bottom"></div>
+            <div class="role" id="utility"></div>
+          </div>
+
+          <div class="difficulty">
+            <div class="difficulty-bar" id="diff-3"></div>
+            <div class="difficulty-bar" id="diff-2"></div>
+            <div class="difficulty-bar" id="diff-1"></div>
+          </div>
+          <div class="parameters hidden"></div>
+          <div class="champion-amount">
+            <p><span id="amount"></span> Champions</p>
+          </div>
+          <div class="reset">
+            <i class="fa-solid fa-rotate-left"></i>
+          </div>
+        </div>
+        <div id="output"></div>
+      </section>
+
+      <section id="champion-info">
+        <div class="champion-info-overlay"></div>
+        <div class="champion-info-overlay-background"></div>
+        <p id="champion-name"></p>
+        <i class="fa-solid fa-xmark"></i>
+        <div class="info">
+          <div class="info-parameters">
+            <div class="info-type">
+              <div class="info-type-images">
+                <img src="./assets/champion-types/assassin.png" alt="" />
+              </div>
+              <p>TYPE</p>
+              <p id="info-types">ASSASSIN</p>
+            </div>
+            <div class="info-role">
+              <div class="info-role-images">
+                <img src="./assets/champion-roles/top.png" alt="" />
+              </div>
+              <p>ROLE</p>
+              <p id="info-roles">TOP</p>
+            </div>
+            <div class="info-difficulty">
+              <div class="info-difficulty-bars">
+                <div class="info-difficulty-bar"></div>
+                <div class="info-difficulty-bar"></div>
+                <div class="info-difficulty-bar"></div>
+              </div>
+              <p>DIFFICULTY</p>
+              <p class="info-difficulty-text">Low</p>
+            </div>
+          </div>
+          <div class="lore-text">
+            <p>LORE</p>
+            <p class="lore">
+              Once honored defenders of Shurima against the Void, Aatrox and his
+              brethren would eventually become an even greater threat to
+              Runeterra, and were defeated only by cunning mortal sorcery. But
+              after centuries of imprisonment, Aatrox was the first to find
+              freedom once more, corrupting and transforming those foolish
+              enough to try and wield the magical weapon that contained his
+              essence. Now, with stolen flesh, he walks Runeterra in a brutal
+              approximation of his previous form, seeking an apocalyptic and
+              long overdue vengeance.
+            </p>
+          </div>
+        </div>
+        <div class="abilities">
+          <div class="ability-line"></div>
+          <div class="ability" id="passive">
+            <img src="" alt="" />
+            <p class="hidden">Passive</p>
+          </div>
+          <div class="ability" id="q">
+            <img src="" alt="" />
+            <p class="hidden">Ability Name</p>
+          </div>
+          <div class="ability" id="w">
+            <img src="" alt="" />
+            <p class="hidden">Ability Name</p>
+          </div>
+          <div class="ability" id="e">
+            <img src="" alt="" />
+            <p class="hidden">Ability Name</p>
+          </div>
+          <div class="ability" id="r">
+            <img src="" alt="" />
+            <p class="hidden">Ability Name</p>
+          </div>
+        </div>
+        <div class="champion-ability-preview">
+          <p class="ability-type">PASSIVE</p>
+          <p class="ability-name">Q</p>
+          <p class="ability-description">
+            Aatrox slams his greatsword down, dealing physical damage. He can
+            swing three times, each with a different area of effect.
+          </p>
+          <div class="champion-mastery">
+            <p>CHAMPION MASTERY</p>
+            <div class="champion-mastery-links">
+              <a href="">OP.GG</a>
+              <a href="">U.GG</a>
+            </div>
+          </div>
+          <div class="champion-ability-preview-video">
+            <div class="error-loading-video error-loading-video-toggle">
+              <img
+                src="https://www.leagueoflegends.com/static/no-ability-icon-feb372ba66a6fcea09cdacb239b4f171.png"
+                alt=""
+              />
+              <p>CAN'T DISPLAY THIS ABILITY IN VIDEO FORMAT</p>
+              <img
+                src="https://www.leagueoflegends.com/static/no-ability-background-fdc6db338e4adb76a0dc80e0728ed6d0.jpg"
+                alt=""
+              />
+            </div>
+            <video
+              loop=""
+              autoplay=""
+              muted=""
+              src="https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0523/ability_0523_P1.webm"
+            ></video>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="reko">
+          <p>rekodev</p>
+          <a href="https://www.github.com/rekodev"
+            ><i class="fa-brands fa-github"></i
+          ></a>
+        </div>
+        <p>All Rights Reserved &copy; 2023</p>
+      </div>
+    </footer>
+  </body>
+</html>

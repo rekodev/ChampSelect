@@ -1,0 +1,360 @@
+@font-face {
+  font-family: BeaufortforLOL-BoldItalic;
+  src: url(./Fonts/BeaufortforLOL-BoldItalic.ttf);
+}
+
+#champion-info {
+  position: fixed;
+  /* align-self: center; */
+  bottom: 0;
+  min-height: 555px;
+  max-height: 55.5vh;
+  background: linear-gradient(var(--dark-secondary), var(--dark-primary));
+  width: 100%;
+  /* border: 2px solid red; */
+  z-index: 5;
+  display: none;
+  grid-template-columns: 0.75fr 0.15fr 1fr 0.1fr;
+  grid-template-rows: 0.1fr 0.2fr 1fr 1fr;
+  padding: 4rem;
+  /* align-items: start;
+  justify-content: flex-start; */
+}
+
+.champion-info-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: url(./assets/214665.jpg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.1;
+  top: 0;
+}
+
+.champion-info-overlay-background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(rgba(0, 0, 0, 0), var(--dark-primary));
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  top: 0;
+}
+
+#champion-info #champion-name {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 2;
+  /* border: 1px solid brown; */
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 3.6rem;
+  font-family: BeaufortforLOL-BoldItalic;
+  color: #fff;
+}
+
+#champion-title {
+  font-size: 1.2rem;
+  margin-bottom: -15px;
+  color: var(--color-misc);
+  /* margin-left: 1rem; */
+}
+
+#champion-info .info {
+  /* border: 1px solid green; */
+  grid-column: 1 / span 1;
+  grid-row: 3 / span 2;
+}
+
+#champion-info .abilities {
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 3;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#champion-info .champion-ability-preview {
+  /* border: 2px solid yellow; */
+  grid-column: 3 / span 2;
+  grid-row: 2 / span 3;
+  display: flex;
+  justify-items: flex-end;
+  flex-direction: column;
+  color: #fff;
+  padding-left: 0.5rem;
+  position: relative;
+}
+
+#champion-info .champion-ability-preview-video {
+  height: 100%;
+  width: 55%;
+  position: absolute;
+  right: 0;
+  min-width: 500px;
+}
+
+#champion-info .champion-ability-preview video {
+  /* object-fit: cover; */
+  height: 100%;
+  border: 1px solid var(--color-misc);
+  align-self: center;
+  width: 100%;
+
+  /* position: absolute;
+  top: 0;
+  right: 0; */
+  object-fit: fill;
+}
+
+#champion-info .fa-xmark {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 2rem;
+  color: var(--color-misc);
+}
+
+#champion-info .fa-xmark:hover {
+  cursor: pointer;
+}
+
+h6 {
+  font-family: BeaufortforLOL-BoldItalic;
+}
+
+.ability-line {
+  position: absolute;
+  height: 60%;
+  width: 1px;
+  background-color: var(--color-misc);
+  z-index: -1;
+}
+
+.ability {
+  height: 20%;
+  /* border: 1px solid greenyellow; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* .ability p:first-child {
+  border: 1px solid black;
+  width: 15px;
+} */
+
+.ability-name {
+  font-family: BeaufortforLOL-BoldItalic;
+  color: var(--color-misc);
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.ability-description {
+  width: calc(40%);
+  line-height: 1.2rem;
+  margin-top: 1rem;
+}
+
+.ability img {
+  height: 45px;
+  width: 45px;
+}
+
+.ability img:hover {
+  cursor: pointer;
+}
+
+.ability img:hover .ability img {
+  width: 60px;
+  height: 60px;
+}
+
+.active-ability {
+  border: 1px solid var(--color-misc);
+}
+
+img.active-ability {
+  width: 60px;
+  height: 60px;
+}
+
+.ability-type {
+  color: var(--color-secondary);
+  font-weight: 600;
+  font-family: BeaufortforLOL-BoldItalic;
+  font-size: 1rem;
+}
+
+.info-parameters {
+  height: calc(100% / 3);
+  /* border: 1px solid goldenrod; */
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.info-type,
+.info-role,
+.info-difficulty {
+  /* border: 1px solid red; */
+  height: 100%;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-difficulty-bars {
+  border: 1px solid var(--color-primary);
+  height: 40px;
+  margin-bottom: 1rem;
+  display: flex;
+  padding: 0.5rem;
+  gap: 0.2rem;
+  width: 60px;
+}
+
+.info-difficulty-bar {
+  height: 100%;
+  width: calc(100% / 3);
+  background-color: #5e4722;
+}
+
+.info-difficulty-bar:first-child {
+  background-color: var(--color-primary);
+}
+
+.info-type img,
+.info-role img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+}
+
+.info-type img {
+  width: 35px;
+  height: 35px;
+}
+
+.info-type-images,
+.info-role-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-type p:nth-child(2),
+.info-role p:nth-child(2),
+.info-difficulty p:nth-child(2) {
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.info-type p:nth-child(3),
+.info-role p:nth-child(3),
+.info-difficulty p:nth-child(3) {
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.lore-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0 4rem;
+  font-size: 1.1rem;
+  height: calc(100% / 3 * 2);
+  color: #fff;
+  line-height: 1.2rem;
+  /* border: 1px solid var(--color-misc); */
+}
+
+.lore-text p:first-child {
+  font-family: BeaufortforLOL-BoldItalic;
+  color: var(--color-secondary);
+}
+
+.champion-mastery {
+  width: 40%;
+  position: absolute;
+  bottom: 0;
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.champion-mastery > p {
+  font-family: BeaufortforLOL-BoldItalic;
+  font-size: 1rem;
+  color: var(--color-secondary);
+}
+
+.champion-mastery > div {
+  display: flex;
+  gap: 2.4rem;
+  padding: 0 1rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.champion-mastery > div a {
+  /* text-decoration: none; */
+  color: #fff;
+  font-size: 18px;
+}
+
+.error-loading-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--color-misc);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.error-loading-video img:nth-child(3) {
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+}
+
+.error-loading-video img:first-child {
+  width: 25%;
+  position: relative;
+  z-index: 1;
+}
+
+.error-loading-video p {
+  position: relative;
+  z-index: 1;
+  width: 50%;
+  text-align: center;
+  font-family: BeaufortforLOL-BoldItalic;
+  font-size: 1.2rem;
+}
+
+.error-loading-video-toggle {
+  display: none;
+}

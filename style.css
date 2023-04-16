@@ -1,0 +1,408 @@
+@font-face {
+  font-family: Spiegel-Regular;
+  src: url(./Fonts/Spiegel.ttf);
+}
+
+@font-face {
+  font-family: BeaufortforLOL-BoldItalic;
+  src: url(./Fonts/BeaufortforLOL-BoldItalic.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: black; */
+  font-family: Spiegel-Regular;
+  position: relative;
+}
+
+img {
+  /* width: 100%; */
+  /* object-fit: contain; */
+}
+
+h6 {
+  display: none;
+}
+
+h5 {
+  color: #999485;
+  background-color: #111;
+  width: calc(100% - 2px);
+  position: absolute;
+  bottom: 1px;
+  height: 12.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-top: 1px solid #999485; */
+  /* font-style: italic; */
+  font-size: 1.4rem;
+  font-family: BeaufortforLOL-BoldItalic;
+}
+
+#background-img {
+  height: 100vh;
+  width: 100%;
+  z-index: -1;
+  /* opacity: 100; */
+  position: fixed;
+  background: url('https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltc28d43095579c8b5/5d87c24e8d8a3163705e3070/summonersrift.jpg');
+}
+
+.background-img-cover {
+  width: 100%;
+  height: 100%;
+  background-color: #111111;
+  opacity: 0.5;
+}
+
+/* HEADER */
+header {
+  height: 100px;
+  background-color: #111111;
+}
+
+main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1084px;
+  margin: 0 auto;
+}
+
+section {
+  margin: 0 auto;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 100vh;
+  min-width: 100%;
+}
+
+.search-bar {
+  width: 100%;
+  height: calc(38px * 2 + 4px);
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  align-items: flex-start;
+  position: relative;
+}
+
+.search-bar input {
+  height: calc(50% - 2px);
+  /* width: 598px; */
+  width: 30%;
+  border-radius: 5px;
+  background-color: #111111;
+  border: 1px solid #292929;
+  padding: 5px 5px 5px 45px;
+  color: #fff;
+  font-size: 17px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.search-bar .fa-search {
+  color: #fff;
+  position: absolute;
+  left: 15px;
+  color: var(--color-secondary);
+  top: 11px;
+}
+
+.types,
+.roles {
+  height: calc(50% - 2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10.5px;
+  padding: 0 10.5px;
+  border: 1px solid #292929;
+  border-radius: 5px;
+  background-color: #111111;
+}
+
+#assassin {
+  background: url(./assets/champion-types/assassin.png);
+}
+
+#fighter {
+  background: url(./assets/champion-types/fighter.png);
+}
+
+#mage {
+  background: url(./assets/champion-types/mage.png);
+}
+
+#marksman {
+  background: url(./assets/champion-types/marksman.png);
+}
+
+#support {
+  background: url(./assets/champion-types/support.png);
+}
+
+#tank {
+  background: url(./assets/champion-types/tank.png);
+}
+
+#top {
+  background: url(./assets/champion-roles/top.png);
+}
+#jungle {
+  background: url(./assets/champion-roles/jungle.png);
+}
+#middle {
+  background: url(./assets/champion-roles/middle.png);
+}
+#bottom {
+  background: url(./assets/champion-roles/bottom.png);
+}
+#utility {
+  background: url(./assets/champion-roles/utility.png);
+}
+
+#top,
+#jungle,
+#middle,
+#bottom,
+#utility,
+#assassin,
+#fighter,
+#mage,
+#marksman,
+#support,
+#tank {
+  height: 28px;
+  width: 28px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+
+#assassin,
+#fighter,
+#mage,
+#marksman,
+#support,
+#tank {
+  height: 26px;
+  width: 26px;
+}
+
+.roles > div:hover,
+.types > div:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.difficulty {
+  background-color: #111111;
+  border: 1px solid #292929;
+  border-radius: 5px;
+  height: calc(50% - 2px);
+  padding: 0.5rem 0.35rem;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  /* gap: 0.15rem; */
+  width: 50px;
+}
+
+.difficulty-bar {
+  background-color: #5e4722bd;
+  width: calc(100% / 3);
+  height: 100%;
+}
+
+.difficulty-bar:first-child,
+.difficulty-bar:nth-child(2),
+.difficulty-bar:last-child {
+  border-left: 1px solid var(--dark-primary);
+  border-right: 1px solid var(--dark-primary);
+}
+
+.difficulty-bar:hover {
+  background-color: #c8aa6e;
+  cursor: pointer;
+}
+
+.difficulty-bar:nth-child(1):hover + .difficulty-bar:nth-child(2),
+.difficulty-bar:nth-child(1):hover ~ .difficulty-bar:nth-child(3) {
+  background-color: #c8aa6e;
+}
+
+.difficulty-bar:nth-child(2):hover + .difficulty-bar:nth-child(3) {
+  background-color: #c8aa6e;
+}
+
+.active {
+  /* border: 1px solid #999485; */
+  /* border-radius: 5px; */
+  opacity: 0.55;
+}
+
+.active.difficulty-bar:nth-child(1) ~ .difficulty-bar,
+.active.difficulty-bar:nth-child(1),
+.active.difficulty-bar:nth-child(2) ~ .difficulty-bar,
+.active.difficulty-bar:nth-child(2),
+.active.difficulty-bar:nth-child(3) {
+  background-color: #c8aa6e;
+  opacity: 1;
+}
+
+.champion-amount {
+  background-color: #111111;
+  height: calc(50% - 2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10.5px;
+  border-radius: 5px;
+  border: 1px solid #292929;
+  min-width: 115.66px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.champion-amount p {
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.reset {
+  background-color: #111111;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  border: 1px solid #292929;
+  border-radius: 5px;
+}
+
+.reset:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.reset i {
+  color: #c8aa6e;
+  font-size: 18px;
+}
+
+.parameters {
+  position: absolute;
+  /* background-color: #111111; */
+  height: calc(50% - 2px);
+  bottom: 0;
+  left: 119.66px;
+  /* border: 1px solid #292929; */
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 6px 4px; */
+  padding: 6px 0;
+  gap: 4px;
+}
+
+.champion-parameter {
+  background-color: #c28f2c;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 8px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.champion-parameter:hover {
+  cursor: pointer;
+}
+
+#output {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 1084px;
+}
+
+.champion-card {
+  transition: all 0.5s ease-in-out;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  position: relative;
+}
+
+.champion-card img {
+  border: 1px solid #999485;
+  width: 100%;
+}
+
+.card-img-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: #999485;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  display: none;
+}
+
+.champion-card:hover .card-img-overlay {
+  display: initial;
+  cursor: pointer;
+}
+
+.champion-card:hover img {
+  border: 1px solid var(--color-secondary-light);
+}
+
+.champion-card h6 {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+/* FOOTER */
+footer {
+  height: 100px;
+  background-color: #111111;
+}
+
+@media screen and (max-width: 1200px) {
+  #output {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
