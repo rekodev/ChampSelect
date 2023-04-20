@@ -3,9 +3,11 @@ const output = document.getElementById('output');
 const supportButton = document.querySelector('.support');
 const searchBar = document.querySelector('.search-bar');
 const searchBarInput = document.querySelector('.search-bar input');
-// const championTypes = document.querySelectorAll('.type');
-// const championRoles = document.querySelectorAll('.role');
 const championAmount = document.querySelector('#amount');
+
+// GLOBAL VARIABLES TO CONNECT SEARCH BAR WITH OTHER FILTERS
+let searchTerm = searchBarInput.value;
+let currentNames = [];
 
 const championParameters = document.querySelectorAll('.search-bar > div > div');
 const params = document.querySelector('.parameters');
@@ -41,17 +43,33 @@ const diff3 = document.querySelector('#diff-3');
 
 // LOAD ALL CHAMPIONS
 function loadAllChampions() {
+  const allChampions = [];
+
   fetch(CHAMPION_ENDPOINT)
     .then((res) => res.json())
     .then((data) => {
       const championNames = Object.keys(data.data);
+      let nameCount = 0;
 
       championNames.forEach((name) => {
+        allChampions.push(name);
         const actualChampionName = data.data[name].name;
-        forEachChampionName(name, actualChampionName);
+
+        // IF 'name' INCLUDES SEARCH TERM
+        if (
+          name.toLowerCase().includes(searchTerm) ||
+          actualChampionName.toLowerCase().includes(searchTerm)
+        ) {
+          forEachChampionName(name, actualChampionName);
+          nameCount++;
+        }
       });
-      championAmount.innerText = championNames.length;
+      // championAmount.innerText = championNames.length;
+      championAmount.innerText = nameCount.toString();
     });
+
+  // SETTING CURRENT NAMES TO INCLUDE ALL 163 LOADED CHAMPIONS
+  currentNames = allChampions;
 }
 
 // GENERATING CHAMPION CARDS
@@ -77,6 +95,7 @@ function forEachChampionName(name, champFullName) {
   output.append(card);
 }
 
+// PARAMETER FILTERS
 function championParameterFilter() {
   championParameters.forEach((param) => {
     param.addEventListener('click', (e) => {
@@ -144,28 +163,39 @@ function championParameterFilter() {
           }
 
           activeCheck = true;
-          // console.log(emptyArr);
 
           fetch(CHAMPION_ENDPOINT)
             .then((res) => res.json())
             .then((data) => {
               let emptyObj = {};
-
+              const sortedData = {};
+              const keyArray = [];
               const championNames = Object.keys(data.data);
+
               championNames.forEach((name) => {
                 emptyObj[name] = data.data[name].key;
+                keyArray.push(data.data[name].key);
               });
 
               // -----2ND FETCH-------------------------------------------------------
               fetch('./championrates.json')
                 .then((res) => res.json())
                 .then((data2) => {
+                  keyArray.forEach((el) => {
+                    sortedData[`a${el}`] = data2.data[el];
+                  });
+
+                  data2.data = sortedData;
                   const champKeys = Object.keys(data2.data);
+                  console.log(champKeys);
                   champKeys.forEach((key) => {
+                    newKey = key.substring(1);
+                    console.log(newKey);
+
                     const tags = [];
 
                     for (let objKey of Object.keys(emptyObj)) {
-                      if (key == emptyObj[objKey]) {
+                      if (newKey == emptyObj[objKey]) {
                         // PUSHING TAGS
                         // --- CHAMPION TYPE TAGS
                         data.data[objKey].tags.forEach((tag) => tags.push(tag));
@@ -190,27 +220,41 @@ function championParameterFilter() {
                     });
 
                     for (let champion of Object.keys(emptyObj)) {
-                      if (key == emptyObj[champion]) {
+                      if (newKey == emptyObj[champion]) {
+                        // IF ROLE MATCHES AND CHAMPION NAME INCLUDES SEARCH TERM
                         if (roleMatches && !emptyNames.includes(champion)) {
+                          // EMPTY NAMES IS CHANGED REGARDLESS OF THE SEARCH TERM
                           emptyNames.push(champion);
-                          // console.log(`Tags: ${tags}`);
 
-                          forEachChampionName(
-                            champion,
+                          // FINAL IF TO GENERATE CHAMPIONS BASED ON ALREADY EXISTING SEARCH TERM
+                          if (
+                            champion.toLowerCase().includes(searchTerm) ||
                             data.data[champion].name
-                          );
+                              .toLowerCase()
+                              .includes(searchTerm)
+                          ) {
+                            forEachChampionName(
+                              champion,
+                              data.data[champion].name
+                            );
+                          }
                         }
                       }
                     }
                     // console.log(tags);
                   });
-                  championAmount.innerText = emptyNames.length;
+                  // championAmount.innerText = emptyNames.length;
+                  championAmount.innerText =
+                    document.querySelectorAll('.champion-card').length;
+
+                  // SETTING CURRENT NAMES TO CONTAIN ALL NAMES APPLICABLE TO THE FILTERS SET
+                  currentNames = emptyNames;
                 });
               // ---------------------------------------------------------------------
             });
         }
       });
-      console.log(emptyArr);
+      // console.log(emptyArr);
       if (activeCheck === false) {
         params.classList.add('hidden');
         loadAllChampions();
@@ -240,6 +284,9 @@ function difficulty(difficulty) {
 
 // INPUT CHAMPION SEARCH FUNCTION
 function championSearch() {
+  searchTerm = searchBarInput.value.toLowerCase();
+  console.log(currentNames);
+
   fetch(CHAMPION_ENDPOINT)
     .then((res) => res.json())
     .then((data) => {
@@ -251,9 +298,15 @@ function championSearch() {
 
       championNames.forEach((name) => {
         if (name.toLowerCase().includes(searchBarInput.value.toLowerCase())) {
-          forEachChampionName(name);
+          // console.log(name);
+          currentNames.forEach((currentName) => {
+            if (currentName === name)
+              forEachChampionName(name, data.data[name].name);
+          });
         }
       });
+      const allCards = document.querySelectorAll('.champion-card');
+      championAmount.innerText = allCards.length;
     });
 }
 
@@ -532,23 +585,3 @@ championAbilityImg.forEach((abil, idx) => {
       });
   });
 });
-
-// fetch(CHAMPION_ENDPOINT)
-//   .then((res) => res.json())
-//   .then((data) => {
-//     const champions = Object.keys(data.data);
-//     champions.forEach((champion) => {
-//       console.log(
-//         `${data.data[champion].name} difficulty: ${data.data[champion].info.difficulty}`
-//       );
-//     });
-//   });
-
-// diff3.addEventListener('mouseover', (e) => {
-//   diff1.style.backgroundColor = '#c8aa6e';
-//   console.log(`mouser over`);
-// });
-
-// diff3.addEventListener('mouseleave', (e) => {
-//   diff1.style.backgroundColor = '#5e4722bd';
-// });
