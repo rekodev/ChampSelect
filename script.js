@@ -150,7 +150,6 @@ function championParameterFilter() {
             emptyArr.push(param.id.toUpperCase());
           } else if (param.className.includes('type')) {
             emptyArr.push(param.id[0].toUpperCase() + param.id.slice(1));
-            // WORKING ON THIS ALSO
           } else if (param.className.includes('difficulty')) {
             if (
               emptyArr[emptyArr.length - 1] === '1' ||
@@ -187,10 +186,10 @@ function championParameterFilter() {
 
                   data2.data = sortedData;
                   const champKeys = Object.keys(data2.data);
-                  console.log(champKeys);
+                  // console.log(champKeys);
                   champKeys.forEach((key) => {
                     newKey = key.substring(1);
-                    console.log(newKey);
+                    // console.log(newKey);
 
                     const tags = [];
 
@@ -285,7 +284,7 @@ function difficulty(difficulty) {
 // INPUT CHAMPION SEARCH FUNCTION
 function championSearch() {
   searchTerm = searchBarInput.value.toLowerCase();
-  console.log(currentNames);
+  // console.log(currentNames);
 
   fetch(CHAMPION_ENDPOINT)
     .then((res) => res.json())
@@ -396,7 +395,7 @@ function openAndPopulateChampionInfo() {
               championAbilityName[index].innerText = champion.passive.name;
 
             championAbilityName[index + 1].innerText = spell.name;
-            console.log(spell.id[spell.id.length - 1]);
+            // console.log(spell.id[spell.id.length - 1]);
           });
 
           populateChampionInfo(originalChampionKey, champion);
@@ -430,7 +429,7 @@ function populateChampionInfo(key, champion) {
         typeImageWrapper.removeChild(typeImageWrapper.lastChild);
       }
 
-      console.log(data.data[key]);
+      // console.log(data.data[key]);
       const lanes = Object.keys(data.data[key]);
       const pLanes = [];
       lanes.forEach((lane) => {
@@ -449,7 +448,10 @@ function populateChampionInfo(key, champion) {
 
       champion.tags.forEach((tag) => {
         const typeImg = document.createElement('img');
-        typeImg.setAttribute('src', `./assets/champion-types/${tag}.png`);
+        typeImg.setAttribute(
+          'src',
+          `./assets/champion-types/${tag.toLowerCase()}.png`
+        );
 
         typeImageWrapper.appendChild(typeImg);
       });
@@ -463,6 +465,23 @@ function populateChampionInfo(key, champion) {
       const pTypesText = document.querySelector('#info-types');
       pTypesText.innerText = champion.tags.toString().split(',').join(', ');
     });
+}
+
+function removeBetweenSymbols(str) {
+  let result = '';
+  let insideSymbols = false;
+
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === '<') {
+      insideSymbols = true;
+    } else if (str[i] === '>') {
+      insideSymbols = false;
+    } else if (!insideSymbols) {
+      result += str[i];
+    }
+  }
+
+  return result;
 }
 
 // --- EVENTS
