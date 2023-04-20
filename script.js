@@ -32,7 +32,7 @@ const videoAbilityName = document.querySelector('p.ability-name');
 const videoAbilityDescription = document.querySelector('p.ability-description');
 const videoError = document.querySelector('.error-loading-video');
 
-const CHAMPION_ENDPOINT = `http://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion.json`;
+const CHAMPION_ENDPOINT = `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion.json`;
 const CHAMPION_ROLE_ENDPOINT = `https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/championrates.json`;
 
 const diff1 = document.querySelector('#diff-1');
@@ -84,7 +84,7 @@ function forEachChampionName(name, champFullName) {
   const championImage = document.createElement('img');
   championImage.setAttribute(
     'src',
-    `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${name}_0.jpg`
+    `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${name}_0.jpg`
   );
 
   championName.innerText = `${name}`;
@@ -330,7 +330,7 @@ function openAndPopulateChampionInfo() {
       championName.dataset.name = cardText;
 
       fetch(
-        `http://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion/${cardText}.json`
+        `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion/${cardText}.json`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -385,12 +385,12 @@ function openAndPopulateChampionInfo() {
             if (index === 0) {
               championAbilityImg[
                 index
-              ].src = `http://ddragon.leagueoflegends.com/cdn/13.7.1/img/passive/${champion.passive.image.full}`;
+              ].src = `https://ddragon.leagueoflegends.com/cdn/13.7.1/img/passive/${champion.passive.image.full}`;
             }
 
             championAbilityImg[
               index + 1
-            ].src = `http://ddragon.leagueoflegends.com/cdn/13.7.1/img/spell/${spell.id}.png`;
+            ].src = `https://ddragon.leagueoflegends.com/cdn/13.7.1/img/spell/${spell.id}.png`;
 
             if (index === 0)
               championAbilityName[index].innerText = champion.passive.name;
@@ -521,7 +521,7 @@ championAbilityImg.forEach((abil, idx) => {
     const champion = document.querySelector('p#champion-name').dataset.name;
 
     fetch(
-      `http://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion/${champion}.json`
+      `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion/${champion}.json`
     )
       .then((res) => res.json())
       .then((data) => {
