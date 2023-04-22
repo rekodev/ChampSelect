@@ -327,8 +327,10 @@ function championSearch() {
 // GENERATE PARAMETER
 function generateParams(target, locationToDisplay) {
   const paramDiv = document.createElement('div');
+  const paramDivText = document.createElement('p');
+  paramDiv.appendChild(paramDivText);
   paramDiv.classList.add('champion-parameter');
-  paramDiv.innerText = target.id.toUpperCase();
+  paramDivText.innerText = target.id.toUpperCase();
   locationToDisplay.appendChild(paramDiv);
 }
 
@@ -541,7 +543,7 @@ resetButton.addEventListener('click', () => {
 });
 
 params.addEventListener('click', (e) => {
-  if (e.target.className.includes('champion-parameter')) {
+  if (e.target.parentNode.className.includes('champion-parameter')) {
     const id = e.target.innerText.toLowerCase();
     const desiredBtn = document.querySelector(`#${id}`);
     desiredBtn.click();

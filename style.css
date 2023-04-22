@@ -78,6 +78,7 @@ main {
   justify-content: center;
   max-width: 1084px;
   margin: 0 auto;
+  min-height: calc(100vh - 200px);
 }
 
 section#hero {
@@ -327,15 +328,21 @@ section#hero {
 .champion-parameter {
   background-color: #c28f2c;
   height: 100%;
+  overflow: none;
+  border-radius: 5px;
+}
+
+.champion-parameter p {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 8px;
-  border-radius: 5px;
   color: #fff;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.5px;
+  height: 100%;
+  width: 100%;
 }
 
 .champion-parameter:hover {
@@ -352,8 +359,16 @@ section#hero {
   max-width: 1084px;
 }
 
+@keyframes example {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .champion-card {
-  transition: all 0.5s ease-in-out;
   width: 200px;
   min-height: 362px;
   display: flex;
@@ -362,6 +377,9 @@ section#hero {
   justify-content: center;
   gap: 0.3rem;
   position: relative;
+  animation-name: example;
+  animation-duration: 0.4s;
+  /* transition: opacity 0.5s ease-in-out; */
 }
 
 .champion-card img {
