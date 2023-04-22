@@ -65,7 +65,11 @@ function loadAllChampions() {
         }
       });
       // championAmount.innerText = championNames.length;
-      championAmount.innerText = nameCount.toString();
+      if (nameCount === 1) {
+        championAmount.innerText = nameCount.toString() + ' Champion';
+      } else {
+        championAmount.innerText = nameCount.toString() + ' Champions';
+      }
     });
 
   // SETTING CURRENT NAMES TO INCLUDE ALL 163 LOADED CHAMPIONS
@@ -243,8 +247,15 @@ function championParameterFilter() {
                     // console.log(tags);
                   });
                   // championAmount.innerText = emptyNames.length;
-                  championAmount.innerText =
-                    document.querySelectorAll('.champion-card').length;
+
+                  // championAmount.innerText =
+                  //   document.querySelectorAll('.champion-card').length;
+                  const allCards = document.querySelectorAll('.champion-card');
+                  if (allCards.length === 1) {
+                    championAmount.innerText = allCards.length + ' Champion';
+                  } else {
+                    championAmount.innerText = allCards.length + ' Champions';
+                  }
 
                   // SETTING CURRENT NAMES TO CONTAIN ALL NAMES APPLICABLE TO THE FILTERS SET
                   currentNames = emptyNames;
@@ -305,7 +316,11 @@ function championSearch() {
         }
       });
       const allCards = document.querySelectorAll('.champion-card');
-      championAmount.innerText = allCards.length;
+      if (allCards.length === 1) {
+        championAmount.innerText = allCards.length + ' Champion';
+      } else {
+        championAmount.innerText = allCards.length + ' Champions';
+      }
     });
 }
 
@@ -355,7 +370,9 @@ function openAndPopulateChampionInfo() {
 
           // DEFAULT VIDEO VALUES
           // -- default names
-          abilityDescription.innerText = champion.passive.description;
+          abilityDescription.innerText = removeBetweenSymbols(
+            champion.passive.description
+          );
           videoAbilityName.innerText = champion.passive.name;
           abilityType.innerText = 'PASSIVE';
           championAbilityImg.forEach((abil) =>
@@ -464,9 +481,22 @@ function populateChampionInfo(key, champion) {
 
       const pTypesText = document.querySelector('#info-types');
       pTypesText.innerText = champion.tags.toString().split(',').join(', ');
+
+      // Champion Mastery
+      const uGG = document.getElementById('u.gg');
+      uGG.setAttribute(
+        'href',
+        `https://u.gg/lol/champions/${champion.id}/build`
+      );
+      const probuilds = document.getElementById('probuilds');
+      probuilds.setAttribute(
+        'href',
+        `https://www.probuilds.net/champions/details/${champion.id}`
+      );
     });
 }
 
+// INNER HTML REMOVAL FROM DESCRIPTION STRING
 function removeBetweenSymbols(str) {
   let result = '';
   let insideSymbols = false;
@@ -476,6 +506,8 @@ function removeBetweenSymbols(str) {
       insideSymbols = true;
     } else if (str[i] === '>') {
       insideSymbols = false;
+    } else if (insideSymbols && str[i] === 'b' && str[i + 1] === 'r') {
+      result += '\n';
     } else if (!insideSymbols) {
       result += str[i];
     }
@@ -544,9 +576,9 @@ championAbilityImg.forEach((abil, idx) => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data[champion]);
+        // console.log(data.data[champion]);
         // data.data[champion].
-        console.log(data.data[champion].passive.description);
+        // console.log(data.data[champion].passive.description);
 
         let champKey = data.data[champion].key;
         while (champKey.length < 4) {
@@ -556,11 +588,13 @@ championAbilityImg.forEach((abil, idx) => {
         console.log(champKey);
 
         if (idx === 0) {
-          videoAbilityDescription.innerText =
-            data.data[champion].passive.description;
+          videoAbilityDescription.innerText = removeBetweenSymbols(
+            data.data[champion].passive.description
+          );
         } else {
-          videoAbilityDescription.innerText =
-            data.data[champion].spells[idx - 1].description;
+          videoAbilityDescription.innerText = removeBetweenSymbols(
+            data.data[champion].spells[idx - 1].description
+          );
         }
 
         switch (idx) {

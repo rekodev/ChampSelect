@@ -17,6 +17,7 @@
   grid-template-columns: 0.75fr 0.15fr 1fr 0.1fr;
   grid-template-rows: 0.1fr 0.2fr 1fr 1fr;
   padding: 4rem;
+  box-shadow: 5px 5px 75px 50px #242320;
   /* align-items: start;
   justify-content: flex-start; */
 }

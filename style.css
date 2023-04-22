@@ -20,6 +20,7 @@ body {
   background-color: black; */
   font-family: Spiegel-Regular;
   position: relative;
+  background-color: #111;
 }
 
 img {
@@ -79,7 +80,7 @@ main {
   margin: 0 auto;
 }
 
-section {
+section#hero {
   margin: 0 auto;
   padding: 1rem 0;
   display: flex;
@@ -102,7 +103,7 @@ section {
 .search-bar input {
   height: calc(50% - 2px);
   /* width: 598px; */
-  width: 30%;
+  width: 543px;
   border-radius: 5px;
   background-color: #111111;
   border: 1px solid #292929;
@@ -354,6 +355,7 @@ section {
 .champion-card {
   transition: all 0.5s ease-in-out;
   width: 200px;
+  min-height: 362px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -404,5 +406,224 @@ footer {
 @media screen and (max-width: 1200px) {
   #output {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  section#hero {
+    max-width: 860px;
+    min-width: initial;
+  }
+
+  .search-bar input {
+    width: 320px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #output {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .search-bar {
+    height: calc(38px * 3 + 6px);
+    justify-content: space-between;
+  }
+
+  .search-bar input {
+    width: 100%;
+    height: calc(100% / 3 - 2px);
+  }
+
+  .types,
+  .roles,
+  .difficulty,
+  .reset {
+    height: calc(100% / 3 - 2px);
+    margin-top: 42px;
+  }
+
+  .types {
+    width: 290px;
+    gap: 1rem;
+  }
+
+  .roles {
+    gap: 1rem;
+    width: 260px;
+  }
+
+  .champion-amount,
+  .parameters {
+    height: calc(100% / 3 - 2px);
+  }
+
+  .parameters {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  section#hero {
+    max-width: 420px;
+    min-width: 420px;
+    gap: 0rem;
+  }
+
+  #output {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search-bar {
+    height: calc(38px * 4 + 8px);
+    min-width: 100%;
+    /* justify-content: space-between; */
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-bar input {
+    width: 100%;
+    height: calc(100% / 4 - 2px);
+  }
+
+  .types,
+  .roles,
+  .difficulty,
+  .reset {
+    height: calc(100% / 4 - 2px);
+    margin-top: 0px;
+  }
+
+  .types {
+    width: 290px;
+    gap: 1rem;
+    margin-top: 42px;
+    width: 316px;
+  }
+
+  .roles {
+    gap: 1rem;
+    width: 275.5px;
+    margin-top: 0;
+    /* width: initial; */
+  }
+
+  .reset {
+    position: absolute;
+    right: 0;
+    top: 42px;
+  }
+
+  .champion-amount,
+  .parameters {
+    height: calc(100% / 4 - 2px);
+    margin-top: 0;
+    left: 0;
+  }
+
+  .champion-amount {
+    position: absolute;
+    top: 84px;
+    left: 280px;
+    width: 140px;
+  }
+
+  .difficulty {
+    position: absolute;
+    top: 42px;
+    right: 42px;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+    width: 57.5px;
+  }
+
+  .parameters {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  /* STILL WORKING HERE */
+
+  section#hero {
+    width: 100%;
+    padding: 1rem 2rem;
+    min-width: initial;
+    max-width: initial;
+    min-height: initial;
+    max-height: initial;
+  }
+
+  #output {
+    width: 100%;
+  }
+
+  .search-bar {
+    height: calc(38px * 5 + 10px);
+  }
+
+  .search-bar input {
+    min-width: 256px;
+    height: calc(100% / 5 - 2px);
+  }
+
+  .types,
+  .roles,
+  .difficulty,
+  .reset,
+  .champion-amount {
+    height: calc(100% / 5 - 2px);
+  }
+
+  .reset {
+    position: initial;
+  }
+
+  .types {
+    min-width: 256px;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+  .roles {
+    min-width: 214px;
+    width: calc(100% - 42px);
+    /* padding: 0; */
+    justify-content: space-evenly;
+  }
+
+  .reset {
+    position: absolute;
+    top: 84px;
+    padding: 0;
+  }
+
+  .difficulty {
+    width: 65px;
+    left: 0;
+    top: 127px;
+    margin-top: -1px;
+    height: calc(100% / 5 - 2px);
+  }
+
+  .champion-amount {
+    position: initial;
+    align-self: end;
+    width: calc(100% - 65px - 4px);
+  }
+
+  .parameters {
+    height: calc(100% / 5 - 2px);
+  }
+
+  .champion-card {
+    /* transition: all 0.5s ease-in-out; */
+    transition: none;
+    max-width: 200px;
+    max-height: 362px;
+    width: 100%;
+    min-height: initial;
   }
 }
