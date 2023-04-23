@@ -1,5 +1,5 @@
 // --- VARIABLES
-const output = document.getElementById('output');
+var output = document.getElementById('output');
 const supportButton = document.querySelector('.support');
 const searchBar = document.querySelector('.search-bar');
 const searchBarInput = document.querySelector('.search-bar input');
