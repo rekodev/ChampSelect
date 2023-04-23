@@ -3,7 +3,7 @@ const output = document.getElementById('output');
 const supportButton = document.querySelector('.support');
 const searchBar = document.querySelector('.search-bar');
 const searchBarInput = document.querySelector('.search-bar input');
-const championAmount = document.querySelector('#amount');
+const championAmount = document.querySelector('.champion-amount');
 
 // GLOBAL VARIABLES TO CONNECT SEARCH BAR WITH OTHER FILTERS
 let searchTerm = searchBarInput.value;
