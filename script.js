@@ -518,6 +518,11 @@ function removeBetweenSymbols(str) {
   return result;
 }
 
+function triggerChange(element) {
+  let changeEvent = new Event('input');
+  element.dispatchEvent(changeEvent);
+}
+
 // --- EVENTS
 document.addEventListener('DOMContentLoaded', loadAllChampions);
 
@@ -526,6 +531,9 @@ document.addEventListener('DOMContentLoaded', championParameterFilter);
 searchBarInput.addEventListener('input', championSearch);
 
 resetButton.addEventListener('click', () => {
+  searchBarInput.value = '';
+  triggerChange(searchBarInput);
+
   championParameters.forEach((param) => {
     param.classList.remove('active');
   });
