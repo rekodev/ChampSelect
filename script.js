@@ -91,6 +91,12 @@ function forEachChampionName(name, champFullName) {
     `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${name}_0.jpg`
   );
 
+  championImage.setAttribute('loading', 'lazy');
+  championImage.style.opacity = '0';
+  championImage.addEventListener('load', () => {
+    championImage.style.opacity = '1';
+  });
+
   championName.innerText = `${name}`;
   fullChampionName.innerText = `${champFullName}`;
 
@@ -414,7 +420,12 @@ function openAndPopulateChampionInfo() {
               championAbilityName[index].innerText = champion.passive.name;
 
             championAbilityName[index + 1].innerText = spell.name;
-            // console.log(spell.id[spell.id.length - 1]);
+          });
+
+          championAbilityImg.forEach((img) => {
+            img.addEventListener('load', () => {
+              img.style.opacity = '1';
+            });
           });
 
           populateChampionInfo(originalChampionKey, champion);
