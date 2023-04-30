@@ -283,7 +283,6 @@ section#hero {
   left: 0;
   color: #fff;
   font-size: 14px;
-  z-index: 999;
 }
 
 .reset {
@@ -342,7 +341,6 @@ section#hero {
   height: 100%;
   width: 100%;
   position: relative;
-  z-index: 999;
 }
 
 .champion-parameter:hover {
@@ -371,6 +369,7 @@ section#hero {
 .champion-card {
   width: 200px;
   min-height: 362px;
+  background-color: #111;
   display: flex;
   flex-direction: column;
   align-items: center;

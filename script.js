@@ -490,11 +490,15 @@ function populateChampionInfo(key, champion) {
         'href',
         `https://u.gg/lol/champions/${champion.id}/build`
       );
+      uGG.setAttribute('target', '_blank');
+
       const probuilds = document.getElementById('probuilds');
       probuilds.setAttribute(
         'href',
         `https://www.probuilds.net/champions/details/${champion.id}`
       );
+
+      probuilds.setAttribute('target', '_blank');
     });
 }
 
