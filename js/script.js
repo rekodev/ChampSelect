@@ -192,7 +192,7 @@ function championParameterFilter() {
               });
 
               // -----2ND FETCH-------------------------------------------------------
-              fetch('../data/championrates.json')
+              fetch('../championrates.json')
                 .then((res) => res.json())
                 .then((data2) => {
                   keyArray.forEach((el) => {
@@ -531,7 +531,7 @@ function populateChampionInfo(key, champion) {
   const lore = document.querySelector('.lore');
   lore.innerText = champion.lore;
 
-  fetch('../data/championrates.json')
+  fetch('../championrates.json')
     .then((res) => res.json())
     .then((data) => {
       while (roleImageWrapper.lastChild) {
