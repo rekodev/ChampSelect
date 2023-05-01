@@ -195,6 +195,7 @@ function championParameterFilter() {
               fetch('../data/championrates.json')
                 .then((res) => res.json())
                 .then((data2) => {
+                  console.log('yeet');
                   keyArray.forEach((el) => {
                     sortedData[`a${el}`] = data2.data[el];
                   });
