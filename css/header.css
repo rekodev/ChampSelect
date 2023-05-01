@@ -1,6 +1,18 @@
+/* FONTS */
+
 @font-face {
   font-family: FF-Mark;
-  src: url(./Fonts/FF-Mark.otf);
+  src: url(../assets/Fonts/FF-Mark.otf);
+}
+
+@font-face {
+  font-family: Spiegel-Regular;
+  src: url(../assets/Fonts/Spiegel.ttf);
+}
+
+@font-face {
+  font-family: BeaufortforLOL-BoldItalic;
+  src: url(../assets/Fonts/BeaufortforLOL-BoldItalic.ttf);
 }
 
 header .header-container {
@@ -54,7 +66,6 @@ header .header-container {
 
 @media screen and (min-width: 320px) and (max-width: 480px) {
   header .header-container {
-    /* max-width: 420px; */
     min-width: 256px;
     width: calc(100% - 4rem);
   }

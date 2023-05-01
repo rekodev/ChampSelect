@@ -1,4 +1,4 @@
-// --- VARIABLES
+// --- VARIABLES ------------------------------------------------------------------------------------------
 var output = document.getElementById('card-output');
 const supportButton = document.querySelector('.support');
 const searchBar = document.querySelector('.search-bar');
@@ -9,11 +9,12 @@ const championAmount = document.querySelector('.champion-amount');
 let searchTerm = searchBarInput.value;
 let currentNames = [];
 
+// CHAMPION PARAMETERS
 const championParameters = document.querySelectorAll('.search-bar > div > div');
 const params = document.querySelector('.parameters');
 const resetButton = document.querySelector('.reset');
 
-// Champion Info Section
+// CHAMPION INFO SECTION
 const championInfoSection = document.querySelector('#champion-info');
 const xMark = document.querySelector('.fa-xmark');
 const championName = document.querySelector('#champion-name');
@@ -26,20 +27,21 @@ const championAbilityName = document.querySelectorAll(
   '.ability p:nth-child(2)'
 );
 
-// Ability Video
+// ABILITY VIDEO
 const abilityVideo = document.querySelector('.champion-ability-preview video');
 const videoAbilityName = document.querySelector('p.ability-name');
 const videoAbilityDescription = document.querySelector('p.ability-description');
 const videoError = document.querySelector('.error-loading-video');
 
-const CHAMPION_ENDPOINT = `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion.json`;
-const CHAMPION_ROLE_ENDPOINT = `https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/championrates.json`;
-
+// DIFFICULTY
 const diff1 = document.querySelector('#diff-1');
 const diff2 = document.querySelector('#diff-2');
 const diff3 = document.querySelector('#diff-3');
 
-// --- FUNCTIONS
+// CHAMPION ENDPOINT
+const CHAMPION_ENDPOINT = `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion.json`;
+
+// --- FUNCTIONS ------------------------------------------------------------------------------------------
 
 // LOAD ALL CHAMPIONS
 function loadAllChampions() {
@@ -76,7 +78,7 @@ function loadAllChampions() {
   currentNames = allChampions;
 }
 
-// GENERATING CHAMPION CARDS
+// GENERATING CHAMPION CARDS (INSIDE loadAllChampions() FUNCTION)
 function forEachChampionName(name, champFullName) {
   const cardImgOverlay = document.createElement('div');
   cardImgOverlay.classList.add('card-img-overlay');
@@ -109,6 +111,9 @@ function forEachChampionName(name, champFullName) {
 function championParameterFilter() {
   championParameters.forEach((param) => {
     param.addEventListener('click', (e) => {
+      const searchedNames = [];
+      const allCardNames = [];
+
       const parameters = document.querySelectorAll('.champion-parameter');
 
       if (e.target.className.includes('difficulty')) {
@@ -146,9 +151,9 @@ function championParameterFilter() {
         });
       }
 
-      while (output.lastChild) {
-        output.removeChild(output.lastChild);
-      }
+      // while (output.lastChild) {
+      //   output.removeChild(output.lastChild);
+      // }
 
       let emptyArr = [];
       let emptyNames = [];
@@ -187,7 +192,7 @@ function championParameterFilter() {
               });
 
               // -----2ND FETCH-------------------------------------------------------
-              fetch('./championrates.json')
+              fetch('../data/championrates.json')
                 .then((res) => res.json())
                 .then((data2) => {
                   keyArray.forEach((el) => {
@@ -242,10 +247,11 @@ function championParameterFilter() {
                               .toLowerCase()
                               .includes(searchTerm)
                           ) {
-                            forEachChampionName(
-                              champion,
-                              data.data[champion].name
-                            );
+                            // forEachChampionName(
+                            //   champion,
+                            //   data.data[champion].name
+                            // );
+                            searchedNames.push(champion);
                           }
                         }
                       }
@@ -257,6 +263,10 @@ function championParameterFilter() {
                   // championAmount.innerText =
                   //   document.querySelectorAll('.champion-card').length;
                   const allCards = document.querySelectorAll('.champion-card');
+                  allCards.forEach((card) => {
+                    allCardNames.push(card.childNodes[1].innerText);
+                  });
+
                   if (allCards.length === 1) {
                     championAmount.innerText = allCards.length + ' Champion';
                   } else {
@@ -265,15 +275,69 @@ function championParameterFilter() {
 
                   // SETTING CURRENT NAMES TO CONTAIN ALL NAMES APPLICABLE TO THE FILTERS SET
                   currentNames = emptyNames;
+
+                  // ALL CHAMPIONS THAT ARE BEING SEARCHED (CLASSLIST 'HIDDEN' IS REMOVED)
+                  searchedNames.forEach((name) => {
+                    allCards.forEach((card) => {
+                      if (card.childNodes[1].innerText === name) {
+                        card.classList.remove('hidden');
+                      }
+                    });
+                  });
+
+                  // ALL CHAMPIONS THAT ARE NOT BEING SEARCHED (CLASSLIST 'HIDDEN IS ADDED)
+                  const intersection = allCardNames.filter(
+                    (el) => !searchedNames.includes(el)
+                  );
+
+                  intersection.forEach((champion) => {
+                    allCards.forEach((card) => {
+                      if (card.childNodes[1].innerText === champion) {
+                        card.classList.add('hidden');
+                      }
+                    });
+                  });
+
+                  if (searchedNames.length === 1) {
+                    championAmount.innerText =
+                      searchedNames.length + ' Champion';
+                  } else {
+                    championAmount.innerText =
+                      searchedNames.length + ' Champions';
+                  }
                 });
               // ---------------------------------------------------------------------
             });
         }
       });
-      // console.log(emptyArr);
+
       if (activeCheck === false) {
         params.classList.add('hidden');
-        loadAllChampions();
+        // loadAllChampions();
+        const allCards = document.querySelectorAll('.champion-card');
+        currentNames = [];
+        let cardLength = 0;
+
+        allCards.forEach((card) => {
+          currentNames.push(card.childNodes[1].innerText);
+
+          if (
+            card.childNodes[1].innerText
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())
+          ) {
+            cardLength++;
+            if (card.className.includes('hidden')) {
+              card.classList.remove('hidden');
+            }
+          }
+        });
+
+        if (cardLength === 1) {
+          championAmount.innerText = cardLength + ' Champion';
+        } else {
+          championAmount.innerText = cardLength + ' Champions';
+        }
       }
     });
   });
@@ -301,31 +365,56 @@ function difficulty(difficulty) {
 // INPUT CHAMPION SEARCH FUNCTION
 function championSearch() {
   searchTerm = searchBarInput.value.toLowerCase();
-  // console.log(currentNames);
 
   fetch(CHAMPION_ENDPOINT)
     .then((res) => res.json())
     .then((data) => {
       const championNames = Object.keys(data.data);
 
-      while (output.lastChild) {
-        output.removeChild(output.lastChild);
-      }
+      const searchedNames = [];
+      const allCardNames = [];
+      const allCards = document.querySelectorAll('.champion-card');
+      allCards.forEach((card) => {
+        allCardNames.push(card.childNodes[1].innerText);
+      });
 
       championNames.forEach((name) => {
         if (name.toLowerCase().includes(searchBarInput.value.toLowerCase())) {
-          // console.log(name);
           currentNames.forEach((currentName) => {
-            if (currentName === name)
-              forEachChampionName(name, data.data[name].name);
+            if (currentName === name) {
+              // PUSHING EACH CHAMPION NAME INTO THE searchedNames array IF IT MATCHES ALL CRITERIAS
+              searchedNames.push(name);
+            }
           });
         }
       });
-      const allCards = document.querySelectorAll('.champion-card');
-      if (allCards.length === 1) {
-        championAmount.innerText = allCards.length + ' Champion';
+
+      // ALL CHAMPIONS THAT ARE BEING SEARCHED (CLASSLIST 'HIDDEN' IS REMOVED)
+      searchedNames.forEach((name) => {
+        allCards.forEach((card) => {
+          if (card.childNodes[1].innerText === name) {
+            card.classList.remove('hidden');
+          }
+        });
+      });
+
+      // ALL CHAMPIONS THAT ARE NOT BEING SEARCHED (CLASSLIST 'HIDDEN IS ADDED)
+      const intersection = allCardNames.filter(
+        (el) => !searchedNames.includes(el)
+      );
+
+      intersection.forEach((champion) => {
+        allCards.forEach((card) => {
+          if (card.childNodes[1].innerText === champion) {
+            card.classList.add('hidden');
+          }
+        });
+      });
+
+      if (searchedNames.length === 1) {
+        championAmount.innerText = searchedNames.length + ' Champion';
       } else {
-        championAmount.innerText = allCards.length + ' Champions';
+        championAmount.innerText = searchedNames.length + ' Champions';
       }
     });
 }
@@ -356,8 +445,6 @@ function openAndPopulateChampionInfo() {
       )
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data.data[cardText]);
-
           const champion = data.data[cardText];
 
           const championTitle = document.createElement('span');
@@ -398,10 +485,6 @@ function openAndPopulateChampionInfo() {
             `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0${championKey}/ability_0${championKey}_P1.webm`
           );
 
-          // abilityVideo.onerror = () => {
-          //   const videoError = document.querySelector('.error-loading-video');
-          //   videoError.classList.remove('error-loading-video-toggle');
-          // };
           abilityVideoOnError(abilityVideo);
 
           // DYNAMIC SPELL IMG ADD
@@ -422,19 +505,18 @@ function openAndPopulateChampionInfo() {
             championAbilityName[index + 1].innerText = spell.name;
           });
 
-          championAbilityImg.forEach((img) => {
-            img.addEventListener('load', () => {
-              img.style.opacity = '1';
-            });
-          });
-
           populateChampionInfo(originalChampionKey, champion);
         });
     }
   });
+  championAbilityImg.forEach((img) => {
+    img.addEventListener('load', () => {
+      img.style.opacity = '1';
+    });
+  });
 }
 
-// VIDEO ERROR FUNCTION
+// VIDEO ERROR FUNCTION (WORKS INSIDE openAndPopulateChampionInfo() FUNCTION)
 function abilityVideoOnError(video) {
   if (!videoError.className.includes('error-loading-video-toggle'))
     videoError.classList.add('error-loading-video-toggle');
@@ -444,12 +526,12 @@ function abilityVideoOnError(video) {
   };
 }
 
-// POPULATING CHAMPION INFO
+// POPULATING CHAMPION INFO (WORKS INSIDE openAndPopulateChampionInfo() FUNCTION)
 function populateChampionInfo(key, champion) {
   const lore = document.querySelector('.lore');
   lore.innerText = champion.lore;
 
-  fetch('./championrates.json')
+  fetch('../data/championrates.json')
     .then((res) => res.json())
     .then((data) => {
       while (roleImageWrapper.lastChild) {
@@ -469,7 +551,7 @@ function populateChampionInfo(key, champion) {
           const roleImg = document.createElement('img');
           roleImg.setAttribute(
             'src',
-            `./assets/champion-roles/${lane.toLowerCase()}.png`
+            `../assets/champion-roles/${lane.toLowerCase()}.png`
           );
 
           roleImageWrapper.appendChild(roleImg);
@@ -480,7 +562,7 @@ function populateChampionInfo(key, champion) {
         const typeImg = document.createElement('img');
         typeImg.setAttribute(
           'src',
-          `./assets/champion-types/${tag.toLowerCase()}.png`
+          `../assets/champion-types/${tag.toLowerCase()}.png`
         );
 
         typeImageWrapper.appendChild(typeImg);
@@ -513,7 +595,7 @@ function populateChampionInfo(key, champion) {
     });
 }
 
-// INNER HTML REMOVAL FROM DESCRIPTION STRING
+// INNER HTML REMOVAL FROM DESCRIPTION STRING (WORKS INSIDE openAndPopulateChampionInfo() FUNCTION)
 function removeBetweenSymbols(str) {
   let result = '';
   let insideSymbols = false;
@@ -533,18 +615,24 @@ function removeBetweenSymbols(str) {
   return result;
 }
 
+// TRIGGER CHANGE FUNCTION (WORKS INSIDE resetButton EVENT FUNCTION)
 function triggerChange(element) {
   let changeEvent = new Event('input');
   element.dispatchEvent(changeEvent);
 }
 
-// --- EVENTS
+// --- EVENTS ------------------------------------------------------------------------------------------
+
+// LOADING ALL CHAMPIONS ON LOAD
 document.addEventListener('DOMContentLoaded', loadAllChampions);
 
+// CHAMPION PARAMETER FILTER ON LOAD
 document.addEventListener('DOMContentLoaded', championParameterFilter);
 
+// SEARCHBAR INPUT LISTENER
 searchBarInput.addEventListener('input', championSearch);
 
+// RESET BUTTON
 resetButton.addEventListener('click', () => {
   searchBarInput.value = '';
   triggerChange(searchBarInput);
@@ -565,6 +653,7 @@ resetButton.addEventListener('click', () => {
   }
 });
 
+// CHAMPION PARAMETER REDIRECT
 params.addEventListener('click', (e) => {
   if (e.target.parentNode.className.includes('champion-parameter')) {
     const id = e.target.innerText.toLowerCase();
@@ -573,13 +662,15 @@ params.addEventListener('click', (e) => {
   }
 });
 
+// X MARK INSIDE CHAMPION INFO (TO CLOSE)
 xMark.addEventListener('click', () => {
   championInfoSection.style.display = 'none';
 });
 
+// OPEN AND POPULATE CHAMPION INFO ON LOAD
 document.addEventListener('DOMContentLoaded', openAndPopulateChampionInfo);
 
-// CHAMPION ABILITY LISTENER
+// CHAMPION ABILITIES CLICK EVENT LISTENER
 championAbilityImg.forEach((abil, idx) => {
   abil.addEventListener('click', () => {
     championAbilityImg.forEach((a) => {
@@ -601,16 +692,10 @@ championAbilityImg.forEach((abil, idx) => {
     )
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data.data[champion]);
-        // data.data[champion].
-        // console.log(data.data[champion].passive.description);
-
         let champKey = data.data[champion].key;
         while (champKey.length < 4) {
           champKey = '0' + champKey;
         }
-
-        console.log(champKey);
 
         if (idx === 0) {
           videoAbilityDescription.innerText = removeBetweenSymbols(
@@ -629,7 +714,6 @@ championAbilityImg.forEach((abil, idx) => {
               'src',
               `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champKey}/ability_${champKey}_P1.webm`
             );
-
             break;
           case 1:
             abilityType.innerText = 'Q';

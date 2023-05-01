@@ -1,11 +1,18 @@
+/* --- FONTS ------------------------------------------------------------------------------------------ */
+
+@font-face {
+  font-family: FF-Mark;
+  src: url(../assets/Fonts/FF-Mark.otf);
+}
+
 @font-face {
   font-family: Spiegel-Regular;
-  src: url(./Fonts/Spiegel.ttf);
+  src: url(../assets/Fonts/Spiegel.ttf);
 }
 
 @font-face {
   font-family: BeaufortforLOL-BoldItalic;
-  src: url(./Fonts/BeaufortforLOL-BoldItalic.ttf);
+  src: url(../assets/Fonts/BeaufortforLOL-BoldItalic.ttf);
 }
 
 * {
@@ -15,18 +22,10 @@
 }
 
 body {
-  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: black; */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   position: relative;
   background-color: #111;
-}
-
-img {
-  /* width: 100%; */
-  /* object-fit: contain; */
 }
 
 h6 {
@@ -43,8 +42,6 @@ h5 {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border-top: 1px solid #999485; */
-  /* font-style: italic; */
   font-size: 1.4rem;
   font-family: BeaufortforLOL-BoldItalic;
 }
@@ -53,7 +50,6 @@ h5 {
   height: 100vh;
   width: 100%;
   z-index: -1;
-  /* opacity: 100; */
   position: fixed;
   background: url('https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltc28d43095579c8b5/5d87c24e8d8a3163705e3070/summonersrift.jpg');
 }
@@ -104,7 +100,6 @@ section#hero {
 
 .search-bar input {
   height: calc(50% - 2px);
-  /* width: 598px; */
   width: 543px;
   border-radius: 5px;
   background-color: #111111;
@@ -139,43 +134,43 @@ section#hero {
 }
 
 #assassin {
-  background: url(./assets/champion-types/assassin.png);
+  background: url(../assets/champion-types/assassin.png);
 }
 
 #fighter {
-  background: url(./assets/champion-types/fighter.png);
+  background: url(../assets/champion-types/fighter.png);
 }
 
 #mage {
-  background: url(./assets/champion-types/mage.png);
+  background: url(../assets/champion-types/mage.png);
 }
 
 #marksman {
-  background: url(./assets/champion-types/marksman.png);
+  background: url(../assets/champion-types/marksman.png);
 }
 
 #support {
-  background: url(./assets/champion-types/support.png);
+  background: url(../assets/champion-types/support.png);
 }
 
 #tank {
-  background: url(./assets/champion-types/tank.png);
+  background: url(../assets/champion-types/tank.png);
 }
 
 #top {
-  background: url(./assets/champion-roles/top.png);
+  background: url(../assets/champion-roles/top.png);
 }
 #jungle {
-  background: url(./assets/champion-roles/jungle.png);
+  background: url(../assets/champion-roles/jungle.png);
 }
 #middle {
-  background: url(./assets/champion-roles/middle.png);
+  background: url(../assets/champion-roles/middle.png);
 }
 #bottom {
-  background: url(./assets/champion-roles/bottom.png);
+  background: url(../assets/champion-roles/bottom.png);
 }
 #utility {
-  background: url(./assets/champion-roles/utility.png);
+  background: url(../assets/champion-roles/utility.png);
 }
 
 #top,
@@ -222,7 +217,6 @@ section#hero {
   flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
-  /* gap: 0.15rem; */
   width: 50px;
 }
 
@@ -254,8 +248,6 @@ section#hero {
 }
 
 .active {
-  /* border: 1px solid #999485; */
-  /* border-radius: 5px; */
   opacity: 0.55;
 }
 
@@ -308,16 +300,13 @@ section#hero {
 
 .parameters {
   position: absolute;
-  /* background-color: #111111; */
   height: calc(50% - 2px);
   bottom: 0;
   left: 119.66px;
-  /* border: 1px solid #292929; */
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 6px 4px; */
   padding: 6px 0;
   gap: 4px;
 }
@@ -378,8 +367,11 @@ section#hero {
   position: relative;
   animation-name: example;
   animation-duration: 0.4s;
-  /* transition: opacity 0.5s ease-in-out; */
   border: 1px solid #999485;
+}
+
+.hidden {
+  display: none;
 }
 
 .champion-card img {
@@ -408,10 +400,6 @@ section#hero {
 .champion-card h6 {
   font-weight: 500;
   font-size: 1.2rem;
-}
-
-.hidden {
-  display: none;
 }
 
 /* FOOTER */
@@ -493,7 +481,6 @@ footer {
   .search-bar {
     height: calc(38px * 4 + 8px);
     min-width: 100%;
-    /* justify-content: space-between; */
     justify-content: flex-start;
     flex-direction: column;
     align-items: flex-start;
@@ -523,7 +510,6 @@ footer {
     gap: 1rem;
     width: 275.5px;
     margin-top: 0;
-    /* width: initial; */
   }
 
   .reset {
@@ -562,8 +548,6 @@ footer {
 }
 
 @media screen and (min-width: 320px) and (max-width: 480px) {
-  /* STILL WORKING HERE */
-
   section#hero {
     width: 100%;
     padding: 1rem 2rem;
@@ -636,7 +620,6 @@ footer {
   }
 
   .champion-card {
-    /* transition: all 0.5s ease-in-out; */
     transition: none;
     max-width: 200px;
     max-height: 362px;

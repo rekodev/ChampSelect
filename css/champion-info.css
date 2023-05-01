@@ -1,36 +1,43 @@
+/* FONTS */
+
+@font-face {
+  font-family: FF-Mark;
+  src: url(../assets/Fonts/FF-Mark.otf);
+}
+
+@font-face {
+  font-family: Spiegel-Regular;
+  src: url(../assets/Fonts/Spiegel.ttf);
+}
+
 @font-face {
   font-family: BeaufortforLOL-BoldItalic;
-  src: url(./Fonts/BeaufortforLOL-BoldItalic.ttf);
+  src: url(../assets/Fonts/BeaufortforLOL-BoldItalic.ttf);
 }
 
 #champion-info {
   position: fixed;
-  /* align-self: center; */
   bottom: 0;
   min-height: 555px;
   max-height: 55.5vh;
   background: linear-gradient(var(--dark-secondary), var(--dark-primary));
   width: 100%;
-  /* border: 2px solid red; */
   z-index: 5;
   display: none;
   grid-template-columns: 0.5fr 0.2fr 1fr 0.1fr;
   grid-template-rows: 0.1fr 0.2fr 1fr 1fr;
   padding: 4rem;
   box-shadow: 5px 5px 200px 75px #1d1c1a;
-  /* align-items: start;
-  justify-content: flex-start; */
 }
 
 .champion-info-overlay {
   width: 100%;
   height: 100%;
   position: absolute;
-  background: url(./assets/214665.jpg);
+  background: url(../assets/214665.jpg);
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
-  /* background-attachment: scroll; */
   z-index: -1;
   opacity: 0.1;
   bottom: 0;
@@ -51,7 +58,6 @@
 #champion-info #champion-name {
   grid-column: 1 / span 1;
   grid-row: 1 / span 2;
-  /* border: 1px solid brown; */
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-start;
@@ -65,11 +71,9 @@
   font-size: 1.2rem;
   margin-bottom: -15px;
   color: var(--color-misc);
-  /* margin-left: 1rem; */
 }
 
 #champion-info .info {
-  /* border: 1px solid green; */
   grid-column: 1 / span 1;
   grid-row: 3 / span 2;
 }
@@ -86,7 +90,6 @@
 }
 
 #champion-info .champion-ability-preview {
-  /* border: 2px solid yellow; */
   grid-column: 3 / span 2;
   grid-row: 2 / span 3;
   display: flex;
@@ -105,15 +108,10 @@
 }
 
 #champion-info .champion-ability-preview video {
-  /* object-fit: cover; */
   height: 100%;
   border: 1px solid var(--color-misc);
   align-self: center;
   width: 100%;
-
-  /* position: absolute;
-  top: 0;
-  right: 0; */
   object-fit: fill;
 }
 
@@ -143,7 +141,6 @@ h6 {
 
 .ability {
   height: 20%;
-  /* border: 1px solid greenyellow; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -203,7 +200,6 @@ img.active-ability {
 
 .info-parameters {
   height: calc(100% / 3);
-  /* border: 1px solid goldenrod; */
   display: flex;
   justify-content: space-evenly;
   min-height: 100px;
@@ -212,7 +208,6 @@ img.active-ability {
 .info-type,
 .info-role,
 .info-difficulty {
-  /* border: 1px solid red; */
   height: 100%;
   width: 149px;
   display: flex;
@@ -285,7 +280,6 @@ img.active-ability {
   height: calc(100% / 3 * 2);
   color: #fff;
   line-height: 1.2rem;
-  /* border: 1px solid var(--color-misc); */
 }
 
 .lore-text p:first-child {
@@ -321,7 +315,6 @@ img.active-ability {
 }
 
 .champion-mastery > div a {
-  /* text-decoration: none; */
   color: #fff;
   font-size: 18px;
 }
@@ -417,11 +410,10 @@ img.active-ability {
     width: 100%;
     height: 1622px;
     position: absolute;
-    background: url(./assets/214665.jpg);
+    background: url(../assets/214665.jpg);
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-attachment: scroll; */
     z-index: -1;
     opacity: 0.1;
     bottom: 0;
@@ -471,8 +463,30 @@ img.active-ability {
     display: initial;
     min-width: initial;
     width: initial;
-    position: initial;
+    position: relative;
     margin-top: 2rem;
+    height: 100%;
+  }
+
+  #champion-info .champion-ability-preview-video video {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  #champion-info .champion-ability-preview .error-loading-video {
+    transition: display 0.3s ease-in-out;
+  }
+
+  #champion-info .error-loading-video img:nth-child(3) {
+    object-fit: cover;
+    width: 100%;
+  }
+
+  #champion-info .fa-xmark {
+    right: 2rem;
+  }
+
+  .fa-xmark::before {
+    position: fixed;
   }
 }
 
@@ -575,6 +589,14 @@ img.active-ability {
   img.active-ability {
     width: 55px;
     height: 55px;
+  }
+
+  #champion-info .error-loading-video img:nth-child(1) {
+    width: 20%;
+  }
+
+  #champion-info .error-loading-video p {
+    font-size: 1rem;
   }
 }
 

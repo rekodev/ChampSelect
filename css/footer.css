@@ -1,6 +1,18 @@
+/* FONTS */
+
 @font-face {
   font-family: FF-Mark;
-  src: url(./Fonts/FF-Mark.otf);
+  src: url(../assets/Fonts/FF-Mark.otf);
+}
+
+@font-face {
+  font-family: Spiegel-Regular;
+  src: url(../assets/Fonts/Spiegel.ttf);
+}
+
+@font-face {
+  font-family: BeaufortforLOL-BoldItalic;
+  src: url(../assets/Fonts/BeaufortforLOL-BoldItalic.ttf);
 }
 
 footer .footer-container {
@@ -51,7 +63,6 @@ footer .footer-container {
 
 @media screen and (min-width: 320px) and (max-width: 480px) {
   footer .footer-container {
-    /* max-width: 420px; */
     min-width: 256px;
     width: calc(100% - 4rem);
   }
