@@ -148,6 +148,10 @@ function championParameterFilter() {
           console.log(
             parameter.innerText.toLowerCase() == e.target.id.toLowerCase()
           );
+          console.log('parameter innertext');
+          console.log(parameter.innerText.toLowerCase());
+          console.log('e target id ');
+          console.log(e.target.id.toLowerCase());
           if (parameter.innerText.toLowerCase() == e.target.id.toLowerCase()) {
             parameter.parentNode.removeChild(parameter);
           }
