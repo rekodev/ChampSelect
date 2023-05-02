@@ -143,13 +143,12 @@ function championParameterFilter() {
 
       if (e.target.className.includes('active')) {
         generateParams(e.target, params);
-        console.log('generated');
-        console.log(e.target.className);
       } else {
-        console.log('removed');
-        console.log(e.target.className);
         parameters.forEach((parameter) => {
+          console.log('target id: ' + e.target.id);
+          console.log('parameter text: ' + parameter.innerText.toLowerCase());
           if (parameter.innerText.toLowerCase() === e.target.id) {
+            console.log('yeet');
             parameter.parentNode.removeChild(parameter);
           }
         });
