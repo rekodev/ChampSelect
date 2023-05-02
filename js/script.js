@@ -144,8 +144,10 @@ function championParameterFilter() {
       if (e.target.className.includes('active')) {
         generateParams(e.target, params);
         console.log('generated');
+        console.log(e.target.className);
       } else {
         console.log('removed');
+        console.log(e.target.className);
         parameters.forEach((parameter) => {
           if (parameter.innerText.toLowerCase() === e.target.id) {
             parameter.parentNode.removeChild(parameter);
