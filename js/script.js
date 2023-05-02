@@ -1,5 +1,11 @@
 // --- VARIABLES ------------------------------------------------------------------------------------------
-var output = document.getElementById('card-output');
+// HEADER
+const infoButton = document.querySelector('.fa-info');
+const infoHelp = document.querySelector('.info-help');
+const infoDivXMark = document.querySelector('.info-help-text-area .fa-xmark');
+
+// MAIN SECTION
+const output = document.getElementById('card-output');
 const supportButton = document.querySelector('.support');
 const searchBar = document.querySelector('.search-bar');
 const searchBarInput = document.querySelector('.search-bar input');
@@ -42,6 +48,14 @@ const diff3 = document.querySelector('#diff-3');
 const CHAMPION_ENDPOINT = `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion.json`;
 
 // --- FUNCTIONS ------------------------------------------------------------------------------------------
+// TOGGLE HELP
+function infoHelpToggle() {
+  infoHelp.classList.toggle('hidden');
+  if (document.body.style.overflowY !== 'hidden')
+    document.body.style.overflowY = 'hidden';
+  else document.body.style.overflowY = 'initial';
+  console.log(document.body.style.overflowY);
+}
 
 // LOAD ALL CHAMPIONS
 function loadAllChampions() {
@@ -622,6 +636,9 @@ function triggerChange(element) {
 }
 
 // --- EVENTS ------------------------------------------------------------------------------------------
+// INFO HELP BUTTONS
+infoButton.addEventListener('click', infoHelpToggle);
+infoDivXMark.addEventListener('click', infoHelpToggle);
 
 // LOADING ALL CHAMPIONS ON LOAD
 document.addEventListener('DOMContentLoaded', loadAllChampions);
