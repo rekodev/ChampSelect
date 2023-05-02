@@ -551,7 +551,7 @@ function populateChampionInfo(key, champion) {
           const roleImg = document.createElement('img');
           roleImg.setAttribute(
             'src',
-            `../assets/champion-roles/${lane.toLowerCase()}.png`
+            `./assets/champion-roles/${lane.toLowerCase()}.png`
           );
 
           roleImageWrapper.appendChild(roleImg);
@@ -562,7 +562,7 @@ function populateChampionInfo(key, champion) {
         const typeImg = document.createElement('img');
         typeImg.setAttribute(
           'src',
-          `../assets/champion-types/${tag.toLowerCase()}.png`
+          `./assets/champion-types/${tag.toLowerCase()}.png`
         );
 
         typeImageWrapper.appendChild(typeImg);
