@@ -145,14 +145,12 @@ function championParameterFilter() {
         generateParams(e.target, params);
       } else {
         parameters.forEach((parameter) => {
-          console.log(
-            parameter.innerText.toLowerCase() == e.target.id.toLowerCase()
-          );
-          console.log('parameter innertext');
-          console.log(parameter.innerText.toLowerCase());
-          console.log('e target id ');
-          console.log(e.target.id.toLowerCase());
-          if (parameter.innerText.toLowerCase() == e.target.id.toLowerCase()) {
+          if (
+            parameter.innerText
+              .toLowerCase()
+              .includes(e.target.id.toLowerCase())
+          ) {
+            console.log('does include');
             parameter.parentNode.removeChild(parameter);
           }
         });
