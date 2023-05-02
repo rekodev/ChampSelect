@@ -84,6 +84,7 @@ header .header-container {
   justify-content: center;
   align-items: center;
   background: #111111b7;
+  animation: fadeIn 0.2s;
 }
 
 .info-help-text-area {
@@ -94,7 +95,7 @@ header .header-container {
   background-color: #111;
   border: 2px solid #292929;
   position: relative;
-  padding: 2rem;
+  padding: 3rem;
 }
 
 .info-help-text-area .fa-xmark {

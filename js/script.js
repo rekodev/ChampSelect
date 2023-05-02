@@ -22,7 +22,7 @@ const resetButton = document.querySelector('.reset');
 
 // CHAMPION INFO SECTION
 const championInfoSection = document.querySelector('#champion-info');
-const xMark = document.querySelector('.fa-xmark');
+const xMark = document.querySelector('#champion-info .fa-xmark');
 const championName = document.querySelector('#champion-name');
 const championInfoWrapper = document.querySelector('.info');
 const championAbilitiesWrapper = document.querySelector('.abilities');
@@ -54,7 +54,7 @@ function infoHelpToggle() {
   if (document.body.style.overflowY !== 'hidden')
     document.body.style.overflowY = 'hidden';
   else document.body.style.overflowY = 'initial';
-  console.log(document.body.style.overflowY);
+  // console.log(document.body.style.overflowY);
 }
 
 // LOAD ALL CHAMPIONS
