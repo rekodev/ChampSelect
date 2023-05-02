@@ -143,7 +143,9 @@ function championParameterFilter() {
 
       if (e.target.className.includes('active')) {
         generateParams(e.target, params);
+        console.log('generated');
       } else {
+        console.log('removed');
         parameters.forEach((parameter) => {
           if (parameter.innerText.toLowerCase() === e.target.id) {
             parameter.parentNode.removeChild(parameter);
@@ -195,7 +197,6 @@ function championParameterFilter() {
               fetch('../data/championrates.json')
                 .then((res) => res.json())
                 .then((data2) => {
-                  console.log('yeet');
                   keyArray.forEach((el) => {
                     sortedData[`a${el}`] = data2.data[el];
                   });
