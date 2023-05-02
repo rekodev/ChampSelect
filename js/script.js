@@ -51,10 +51,11 @@ const CHAMPION_ENDPOINT = `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/e
 // TOGGLE HELP
 function infoHelpToggle() {
   infoHelp.classList.toggle('hidden');
-  if (document.body.style.overflowY !== 'hidden')
-    document.body.style.overflowY = 'hidden';
-  else document.body.style.overflowY = 'initial';
-  // console.log(document.body.style.overflowY);
+  if (document.body.style.overflow !== 'hidden') {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'initial';
+  }
 }
 
 // LOAD ALL CHAMPIONS

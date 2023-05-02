@@ -28,6 +28,10 @@
   display: none;
 }
 
+body {
+  position: relative;
+}
+
 header .header-container {
   max-width: 1084px;
   height: 100%;
@@ -45,8 +49,7 @@ header .header-container {
   align-items: center;
 }
 
-.header-container .logo p,
-.header-container a {
+.header-container .logo p {
   font-size: 1.6rem;
   font-weight: 600;
   font-family: FF-Mark;
@@ -88,8 +91,8 @@ header .header-container {
 }
 
 .info-help-text-area {
-  width: 50%;
-  height: 50%;
+  width: 80%;
+  max-width: 800px;
   border: 2px solid green;
   border-radius: 5px;
   background-color: #111;
@@ -114,6 +117,10 @@ header .header-container {
 }
 
 .info-help-text-area p {
+  color: #fff;
+}
+
+.info-help-text-area p > a {
   color: #fff;
 }
 

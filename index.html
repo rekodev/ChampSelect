@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="apple-touch-icon" href="./assets/images/apple-touch-icon.png" />
     <link rel="stylesheet" href="./css/css-variables.css" />
+    <link rel="stylesheet" href="./css/global-classes.css" />
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/champion-info.css" />
@@ -57,16 +58,30 @@
               ></path>
             </g>
           </svg>
-          <p>ChampSelect</p>
+          <p class="prevent-select">ChampSelect</p>
         </div>
         <i class="fa-solid fa-info"></i>
         <div class="info-help hidden">
           <div class="info-help-text-area">
             <i class="fa-solid fa-xmark"></i>
             <p>
-              Welcome to ChampSelect, a filtering tool that allows you to look
-              up champion information and filter through champions using
-              pre-built parameters, as well as a search function.
+              ChampSelect is a basic application that allows users to search for
+              a specific champion and filter through champions by champion role,
+              type, and difficulty. The search functionality and filters can be
+              used both independently and together, allowing for maximum
+              flexibility in finding the desired champion.<br /><br />
+              Once a user has found a champion they are interested in, they can
+              click on the champion's card to reveal a detailed view that
+              includes the champion's name, lore, types, roles, difficulty,
+              abilities and their descriptions. The detailed view also includes
+              an ability video preview, allowing you to see the champion's
+              abilities in action.<br /><br />ChampSelect was created under Riot
+              Games' "<a href="https://https://www.riotgames.com/en/legal"
+                >Legal Jibber Jabber</a
+              >" policy using assets owned by Riot Games. Riot Games does not
+              endorse or sponsor this project. <br /><br />For a more detailed
+              description and additional information, please visit my
+              <a href="https://github.com/rekodev/ChampSelect">GitHub</a> page.
             </p>
           </div>
         </div>
@@ -100,7 +115,7 @@
             <div class="difficulty-bar" id="diff-1"></div>
           </div>
           <div class="parameters hidden"></div>
-          <div class="champion-amount"></div>
+          <div class="champion-amount prevent-select"></div>
           <div class="reset">
             <i class="fa-solid fa-rotate-left"></i>
           </div>
@@ -209,12 +224,12 @@
     <footer>
       <div class="footer-container">
         <div class="reko">
-          <p>rekodev</p>
+          <p class="prevent-select">rekodev</p>
           <a href="https://www.github.com/rekodev"
             ><i class="fa-brands fa-github"></i
           ></a>
         </div>
-        <p>All Rights Reserved &copy; 2023</p>
+        <p class="prevent-select">All Rights Reserved &copy; 2023</p>
       </div>
     </footer>
   </body>
