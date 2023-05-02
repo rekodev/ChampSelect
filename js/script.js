@@ -150,15 +150,10 @@ function championParameterFilter() {
               .toLowerCase()
               .includes(e.target.id.toLowerCase())
           ) {
-            console.log('does include');
             parameter.parentNode.removeChild(parameter);
           }
         });
       }
-
-      // while (output.lastChild) {
-      //   output.removeChild(output.lastChild);
-      // }
 
       let emptyArr = [];
       let emptyNames = [];
@@ -197,7 +192,7 @@ function championParameterFilter() {
               });
 
               // -----2ND FETCH-------------------------------------------------------
-              fetch('../data/championrates.json')
+              fetch('./data/championrates.json')
                 .then((res) => res.json())
                 .then((data2) => {
                   keyArray.forEach((el) => {
@@ -536,7 +531,7 @@ function populateChampionInfo(key, champion) {
   const lore = document.querySelector('.lore');
   lore.innerText = champion.lore;
 
-  fetch('../data/championrates.json')
+  fetch('./data/championrates.json')
     .then((res) => res.json())
     .then((data) => {
       while (roleImageWrapper.lastChild) {
