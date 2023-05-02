@@ -205,6 +205,7 @@ section#hero {
 .types > div:hover {
   opacity: 0.5;
   cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 
 .difficulty {
@@ -288,14 +289,18 @@ section#hero {
   border-radius: 5px;
 }
 
-.reset:hover {
-  opacity: 0.5;
-  cursor: pointer;
-}
-
 .reset i {
   color: #c8aa6e;
   font-size: 18px;
+}
+
+.reset:hover {
+  cursor: pointer;
+}
+
+.reset:hover i {
+  color: #c8aa6e80;
+  transition: 0.2s ease-in-out;
 }
 
 .parameters {
@@ -311,11 +316,21 @@ section#hero {
   gap: 4px;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .champion-parameter {
   background-color: #c28f2c;
   height: 100%;
   overflow: hidden;
   border-radius: 5px;
+  animation: fadeIn 0.2s;
 }
 
 .champion-parameter p {
@@ -334,6 +349,8 @@ section#hero {
 
 .champion-parameter:hover {
   cursor: pointer;
+  background-color: #c8aa6e80;
+  transition: 0.2s ease-in-out;
 }
 
 #card-output {
@@ -346,7 +363,7 @@ section#hero {
   max-width: 1084px;
 }
 
-@keyframes example {
+@keyframes halfFadeIn {
   from {
     opacity: 0.5;
   }
@@ -365,8 +382,7 @@ section#hero {
   justify-content: center;
   gap: 0.3rem;
   position: relative;
-  animation-name: example;
-  animation-duration: 0.4s;
+  animation: halfFadeIn 0.4s;
   border: 1px solid #999485;
 }
 
@@ -388,13 +404,24 @@ section#hero {
   display: none;
 }
 
+@keyframes championCardOverlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
 .champion-card:hover .card-img-overlay {
   display: initial;
-  cursor: pointer;
+  animation: championCardOverlayFadeIn 0.3s;
 }
 
 .champion-card:hover {
+  cursor: pointer;
   border: 1px solid var(--color-secondary-light);
+  transition: border 0.3s ease-in-out;
 }
 
 .champion-card h6 {
@@ -555,6 +582,10 @@ footer {
     max-width: initial;
     min-height: initial;
     max-height: initial;
+  }
+
+  h5 {
+    font-size: 1rem;
   }
 
   #card-output {
