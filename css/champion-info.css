@@ -37,6 +37,17 @@
   }
 }
 
+@keyframes championInfoClose {
+  from {
+    max-height: 555px;
+    opacity: 1;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
 #champion-info {
   position: fixed;
   bottom: 0;
@@ -133,6 +144,7 @@
   right: 0;
   min-width: 600px;
   max-width: 600px;
+  min-height: 408px;
 }
 
 #champion-info .champion-ability-preview video {
@@ -220,6 +232,15 @@ img.active-ability {
   transition: all 0.2s ease-out;
 }
 
+@keyframes opacityAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .ability-type {
   color: var(--color-secondary);
   font-weight: 600;
@@ -232,6 +253,7 @@ img.active-ability {
   display: flex;
   justify-content: space-evenly;
   min-height: 100px;
+  margin-top: 1rem;
 }
 
 .info-type,
@@ -302,18 +324,30 @@ img.active-ability {
 .lore-text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 0.5rem;
   font-size: 1rem;
   height: calc(100% / 3 * 2);
   color: #fff;
   line-height: 1.2rem;
+  margin-top: 2.2rem;
 }
 
 .lore-text p:first-child {
   font-family: BeaufortforLOL-BoldItalic;
   color: var(--color-secondary);
+}
+
+.lore-text #see-more {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
 }
 
 .champion-mastery {
@@ -394,6 +428,9 @@ img.active-ability {
 
   #champion-info .champion-ability-preview-video {
     display: none;
+    max-width: initial;
+    min-width: initial;
+    min-height: initial;
   }
 
   #champion-info .abilities {
@@ -420,6 +457,12 @@ img.active-ability {
 
   #champion-info .champion-ability-preview .champion-mastery {
     width: 100%;
+  }
+
+  #champion-info .fa-xmark:hover {
+    border-radius: initial;
+    background-color: initial;
+    transition: initial;
   }
 }
 
@@ -495,10 +538,11 @@ img.active-ability {
   #champion-info .champion-ability-preview-video {
     display: initial;
     min-width: initial;
-    width: initial;
+    width: 100%;
+    height: initial;
     position: relative;
     margin-top: 2rem;
-    height: 100%;
+    /* height: 120%; */
   }
 
   #champion-info .champion-ability-preview-video video {
@@ -507,16 +551,18 @@ img.active-ability {
 
   #champion-info .champion-ability-preview .error-loading-video {
     transition: display 0.3s ease-in-out;
+    height: 100%;
   }
 
   #champion-info .error-loading-video img:nth-child(3) {
     object-fit: cover;
     width: 100%;
+    height: 100%;
   }
 
   #champion-info .fa-xmark {
     right: 1rem;
-    top: 2rem;
+    top: 1rem;
   }
 
   #champion-info .fa-xmark::before {

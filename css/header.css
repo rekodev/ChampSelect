@@ -77,10 +77,11 @@ header .header-container {
 }
 
 .info-help {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
-  height: 100vh;
+  height: 100%;
+  max-height: -webkit-fill-available;
   width: 100%;
   z-index: 999;
   display: flex;

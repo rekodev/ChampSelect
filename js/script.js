@@ -34,7 +34,12 @@ const championAbilityName = document.querySelectorAll(
 );
 
 // ABILITY VIDEO
+const tempVideo = document.createElement('video');
+const abilityVideoDiv = document.querySelector(
+  '.champion-ability-preview-video'
+);
 const abilityVideo = document.querySelector('.champion-ability-preview video');
+const videoAbilityType = document.querySelector('p.ability-type');
 const videoAbilityName = document.querySelector('p.ability-name');
 const videoAbilityDescription = document.querySelector('p.ability-description');
 const videoError = document.querySelector('.error-loading-video');
@@ -51,11 +56,11 @@ const CHAMPION_ENDPOINT = `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/e
 // TOGGLE HELP
 function infoHelpToggle() {
   infoHelp.classList.toggle('hidden');
-  if (document.body.style.overflow !== 'hidden') {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'initial';
-  }
+  // if (document.body.style.overflow !== 'hidden') {
+  //   document.body.style.overflow = 'hidden';
+  // } else {
+  //   document.body.style.overflow = 'initial';
+  // }
 }
 
 // LOAD ALL CHAMPIONS
@@ -87,6 +92,8 @@ function loadAllChampions() {
       } else {
         championAmount.innerText = nameCount.toString() + ' Champions';
       }
+      // --------------------------------------------------------------
+      openAndPopulateChampionInfo(data);
     });
 
   // SETTING CURRENT NAMES TO INCLUDE ALL 163 LOADED CHAMPIONS
@@ -444,16 +451,35 @@ function generateParams(target, locationToDisplay) {
   locationToDisplay.appendChild(paramDiv);
 }
 
-// CHAMPION INFO SECTION FUNCTION
-function openAndPopulateChampionInfo() {
+// CHAMPION INFO SECTION FUNCTION (called inside loadAllChampions(), that's where it gets the fetchedData from)
+function openAndPopulateChampionInfo(fetchedData) {
   output.addEventListener('click', (e) => {
     if (e.target.parentNode.className.includes('champion-card')) {
       championInfoSection.style.display = 'grid';
       const cardText = e.target.parentNode.childNodes[1].innerText;
       const cardActualName = e.target.parentNode.childNodes[2].innerText;
-      // championName.innerText = cardText.toUpperCase();
       championName.innerText = cardActualName.toUpperCase();
       championName.dataset.name = cardText;
+
+      const loreButton = document.querySelector('#see-more');
+      loreButton.classList.remove('hidden');
+
+      // setting champion title
+      const fetchedTitle = fetchedData.data[cardText].title;
+      const championTitle = document.createElement('span');
+      championTitle.id = 'champion-title';
+      championTitle.innerText = fetchedTitle.toUpperCase();
+      championName.appendChild(championTitle);
+
+      // setting champion difficulty
+      const diff = fetchedData.data[cardText].info.difficulty;
+      difficulty(diff);
+
+      // setting the rest of champion info
+      populateChampionInfo(
+        fetchedData.data[cardText].key,
+        fetchedData.data[cardText]
+      );
 
       fetch(
         `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion/${cardText}.json`
@@ -462,16 +488,16 @@ function openAndPopulateChampionInfo() {
         .then((data) => {
           const champion = data.data[cardText];
 
-          const championTitle = document.createElement('span');
-          championTitle.id = 'champion-title';
-          championTitle.innerText = champion.title.toUpperCase();
-          championName.appendChild(championTitle);
+          // changing from champion blurb to lore
+          const loreText = document.querySelector('p.lore');
 
-          const diff = data.data[cardText].info.difficulty;
-          difficulty(diff);
+          loreButton.addEventListener('click', () => {
+            loreButton.classList.add('hidden');
+            loreText.innerText = champion.lore;
+          });
 
-          // Video
-          const originalChampionKey = champion.key;
+          // video
+          // const originalChampionKey = champion.key;
           let championKey = champion.key;
           const abilityType = document.querySelector('.ability-type');
           const abilityDescription = document.querySelector(
@@ -480,6 +506,12 @@ function openAndPopulateChampionInfo() {
 
           // DEFAULT VIDEO VALUES
           // -- default names
+          // animating ability type, name and description after each ability is clicked
+
+          opacityAnimation(videoAbilityType);
+          opacityAnimation(videoAbilityName);
+          opacityAnimation(videoAbilityDescription);
+
           abilityDescription.innerText = removeBetweenSymbols(
             champion.passive.description
           );
@@ -495,7 +527,7 @@ function openAndPopulateChampionInfo() {
           else if (championKey.length === 1) championKey = `00${championKey}`;
 
           // -- default video
-          abilityVideo.setAttribute(
+          tempVideo.setAttribute(
             'src',
             `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0${championKey}/ability_0${championKey}_P1.webm`
           );
@@ -520,13 +552,14 @@ function openAndPopulateChampionInfo() {
             championAbilityName[index + 1].innerText = spell.name;
           });
 
-          populateChampionInfo(originalChampionKey, champion);
+          // populateChampionInfo(originalChampionKey, champion);
         });
     }
   });
   championAbilityImg.forEach((img) => {
     img.addEventListener('load', () => {
       img.style.opacity = '1';
+      opacityAnimation(img);
     });
   });
 }
@@ -544,7 +577,7 @@ function abilityVideoOnError(video) {
 // POPULATING CHAMPION INFO (WORKS INSIDE openAndPopulateChampionInfo() FUNCTION)
 function populateChampionInfo(key, champion) {
   const lore = document.querySelector('.lore');
-  lore.innerText = champion.lore;
+  lore.innerText = champion.blurb;
 
   fetch('./data/championrates.json')
     .then((res) => res.json())
@@ -636,6 +669,15 @@ function triggerChange(element) {
   element.dispatchEvent(changeEvent);
 }
 
+// ANIMATING ABILITIES AFTER EACH ABILTY IS CLICKED (USED WITHIN championAbilityImg.forEach CLICK EVENT LISTENER)
+function opacityAnimation(abilityElement, speed = 0.75) {
+  abilityElement.style.animation = `opacityAnimation ${speed.toString()}s`;
+
+  abilityElement.addEventListener('animationend', () => {
+    abilityElement.style.animation = 'none';
+  });
+}
+
 // --- EVENTS ------------------------------------------------------------------------------------------
 // INFO HELP BUTTONS
 infoButton.addEventListener('click', infoHelpToggle);
@@ -682,15 +724,25 @@ params.addEventListener('click', (e) => {
 
 // X MARK INSIDE CHAMPION INFO (TO CLOSE)
 xMark.addEventListener('click', () => {
-  championInfoSection.style.display = 'none';
+  championInfoSection.style.animation = 'championInfoClose 0.75s';
 });
 
-// OPEN AND POPULATE CHAMPION INFO ON LOAD
-document.addEventListener('DOMContentLoaded', openAndPopulateChampionInfo);
+// CLOSING CHAMPION INFO SECTION AND RESETTING ANIMATION
+championInfoSection.addEventListener('animationend', () => {
+  if (championInfoSection.style.animation.includes('championInfoClose')) {
+    championInfoSection.style.display = 'none';
+    championInfoSection.style.animation = 'maxHeight 0.75s';
+  }
+});
 
 // CHAMPION ABILITIES CLICK EVENT LISTENER
 championAbilityImg.forEach((abil, idx) => {
-  abil.addEventListener('click', () => {
+  abil.addEventListener('click', async () => {
+    // animating ability type, name and description after each ability is clicked
+    opacityAnimation(videoAbilityType);
+    opacityAnimation(videoAbilityName);
+    opacityAnimation(videoAbilityDescription);
+
     championAbilityImg.forEach((a) => {
       a.classList.remove('active-ability');
     });
@@ -699,13 +751,12 @@ championAbilityImg.forEach((abil, idx) => {
     abilityVideoOnError(abilityVideo);
 
     const abilityName = championAbilityName[idx].innerText;
-    const abilityType = document.querySelector('p.ability-type');
 
     videoAbilityName.innerText = abilityName;
 
     const champion = document.querySelector('p#champion-name').dataset.name;
 
-    fetch(
+    await fetch(
       `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion/${champion}.json`
     )
       .then((res) => res.json())
@@ -727,36 +778,41 @@ championAbilityImg.forEach((abil, idx) => {
 
         switch (idx) {
           case 0:
-            abilityType.innerText = 'PASSIVE';
-            abilityVideo.setAttribute(
+            videoAbilityType.innerText = 'PASSIVE';
+            abilityVideo.pause();
+            tempVideo.setAttribute(
               'src',
               `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champKey}/ability_${champKey}_P1.webm`
             );
             break;
           case 1:
-            abilityType.innerText = 'Q';
-            abilityVideo.setAttribute(
+            videoAbilityType.innerText = 'Q';
+            abilityVideo.pause();
+            tempVideo.setAttribute(
               'src',
               `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champKey}/ability_${champKey}_Q1.webm`
             );
             break;
           case 2:
-            abilityType.innerText = 'W';
-            abilityVideo.setAttribute(
+            videoAbilityType.innerText = 'W';
+            abilityVideo.pause();
+            tempVideo.setAttribute(
               'src',
               `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champKey}/ability_${champKey}_W1.webm`
             );
             break;
           case 3:
-            abilityType.innerText = 'E';
-            abilityVideo.setAttribute(
+            videoAbilityType.innerText = 'E';
+            abilityVideo.pause();
+            tempVideo.setAttribute(
               'src',
               `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champKey}/ability_${champKey}_E1.webm`
             );
             break;
           case 4:
-            abilityType.innerText = 'R';
-            abilityVideo.setAttribute(
+            videoAbilityType.innerText = 'R';
+            abilityVideo.pause();
+            tempVideo.setAttribute(
               'src',
               `https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champKey}/ability_${champKey}_R1.webm`
             );
@@ -764,4 +820,10 @@ championAbilityImg.forEach((abil, idx) => {
         }
       });
   });
+});
+
+// SETTING ABILITY VIDEO SOURCE ONLY AFTER THE SOURCE IS LOADED
+tempVideo.addEventListener('loadeddata', () => {
+  abilityVideo.setAttribute('src', `${tempVideo.src}`);
+  abilityVideo.play();
 });
