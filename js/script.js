@@ -3,6 +3,7 @@
 const infoButton = document.querySelector('.fa-info');
 const infoHelp = document.querySelector('.info-help');
 const infoDivXMark = document.querySelector('.info-help-text-area .fa-xmark');
+const modal = document.querySelector('dialog');
 
 // MAIN SECTION
 const output = document.getElementById('card-output');
@@ -54,13 +55,16 @@ const CHAMPION_ENDPOINT = `https://ddragon.leagueoflegends.com/cdn/13.7.1/data/e
 
 // --- FUNCTIONS ------------------------------------------------------------------------------------------
 // TOGGLE HELP
-function infoHelpToggle() {
-  infoHelp.classList.toggle('hidden');
-  // if (document.body.style.overflow !== 'hidden') {
-  //   document.body.style.overflow = 'hidden';
-  // } else {
-  //   document.body.style.overflow = 'initial';
-  // }
+function infoShowModal() {
+  modal.showModal();
+  opacityAnimation(modal, 0.3);
+  document.body.style.overflow = 'hidden';
+}
+
+function infoCloseModal() {
+  modal.close();
+  modal.style.animation = 'fadeOut 0.75s';
+  document.body.style.overflow = 'initial';
 }
 
 // LOAD ALL CHAMPIONS
@@ -680,8 +684,8 @@ function opacityAnimation(abilityElement, speed = 0.75) {
 
 // --- EVENTS ------------------------------------------------------------------------------------------
 // INFO HELP BUTTONS
-infoButton.addEventListener('click', infoHelpToggle);
-infoDivXMark.addEventListener('click', infoHelpToggle);
+infoButton.addEventListener('click', infoShowModal);
+infoDivXMark.addEventListener('click', infoCloseModal);
 
 // LOADING ALL CHAMPIONS ON LOAD
 document.addEventListener('DOMContentLoaded', loadAllChampions);

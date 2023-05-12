@@ -76,7 +76,7 @@ header .header-container {
   cursor: pointer;
 }
 
-.info-help {
+/* .info-help {
   position: fixed;
   top: 0;
   right: 0;
@@ -89,17 +89,23 @@ header .header-container {
   align-items: center;
   background: #111111b7;
   animation: fadeIn 0.2s;
-}
+} */
 
 .info-help-text-area {
   width: 80%;
   max-width: 800px;
-  border: 2px solid green;
   border-radius: 5px;
   background-color: #111;
   border: 2px solid #292929;
   position: relative;
   padding: 3rem;
+  margin: auto;
+}
+
+.info-help-text-area::backdrop {
+  background-color: black;
+  opacity: 0.75;
+  overflow: hidden;
 }
 
 .info-help-text-area .fa-xmark {

@@ -61,29 +61,27 @@
           <p class="prevent-select">ChampSelect</p>
         </div>
         <i class="fa-solid fa-info"></i>
-        <div class="info-help hidden">
-          <div class="info-help-text-area">
-            <i class="fa-solid fa-xmark"></i>
-            <p>
-              ChampSelect is a basic application that allows users to search for
-              a specific champion and filter through champions by champion role,
-              type, and difficulty. The search functionality and filters can be
-              used both independently and together, allowing for maximum
-              flexibility in finding the desired champion.<br /><br />ChampSelect
-              was created under Riot Games' "<a
-                href="https://https://www.riotgames.com/en/legal"
-                >Legal Jibber Jabber</a
-              >" policy using assets owned by Riot Games. Riot Games does not
-              endorse or sponsor this project. <br /><br />For a more detailed
-              description and additional information, please visit my
-              <a href="https://github.com/rekodev/ChampSelect">GitHub</a> page.
-            </p>
-          </div>
-        </div>
+        <dialog class="info-help-text-area">
+          <i class="fa-solid fa-xmark"></i>
+          <p>
+            ChampSelect is a basic application that allows users to search for a
+            specific champion and filter through champions by champion role,
+            type, and difficulty. The search functionality and filters can be
+            used both independently and together, allowing for maximum
+            flexibility in finding the desired champion.<br /><br />ChampSelect
+            was created under Riot Games' "<a
+              href="https://https://www.riotgames.com/en/legal"
+              >Legal Jibber Jabber</a
+            >" policy using assets owned by Riot Games. Riot Games does not
+            endorse or sponsor this project. <br /><br />For a more detailed
+            description and additional information, please visit my
+            <a href="https://github.com/rekodev/ChampSelect">GitHub</a> page.
+          </p>
+        </dialog>
       </div>
     </header>
     <main>
-      <section id="hero">
+      <section id="hero" class="prevent-select">
         <div class="search-bar">
           <input type="text" placeholder="Search" />
           <i class="fa-solid fa-search"></i>
@@ -118,7 +116,7 @@
         <div id="card-output"></div>
       </section>
 
-      <section id="champion-info">
+      <section id="champion-info" class="prevent-select">
         <div class="champion-info-overlay"></div>
         <div class="champion-info-overlay-background"></div>
         <p id="champion-name"></p>
@@ -201,7 +199,6 @@
             <video
               loop
               muted
-              controls="true"
               playsinline
               src="https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0523/ability_0523_P1.webm"
               type="video/webm"
