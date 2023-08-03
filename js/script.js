@@ -185,7 +185,7 @@ function championParameterFilter() {
       let emptyNames = [];
       let activeCheck = false;
 
-      championParameters.forEach((param) => {
+      championParameters.forEach(async (param) => {
         if (param.className.includes('active')) {
           if (param.className.includes('role')) {
             emptyArr.push(param.id.toUpperCase());
@@ -204,9 +204,9 @@ function championParameterFilter() {
 
           activeCheck = true;
 
-          fetch(CHAMPION_ENDPOINT)
+          await fetch(CHAMPION_ENDPOINT)
             .then((res) => res.json())
-            .then((data) => {
+            .then(async (data) => {
               let emptyObj = {};
               const sortedData = {};
               const keyArray = [];
@@ -218,7 +218,7 @@ function championParameterFilter() {
               });
 
               // -----2ND FETCH-------------------------------------------------------
-              fetch('./data/championrates.json')
+              await fetch('./data/championrates.json')
                 .then((res) => res.json())
                 .then((data2) => {
                   keyArray.forEach((el) => {
@@ -227,10 +227,9 @@ function championParameterFilter() {
 
                   data2.data = sortedData;
                   const champKeys = Object.keys(data2.data);
-                  // console.log(champKeys);
+                  console.log(champKeys);
                   champKeys.forEach((key) => {
                     newKey = key.substring(1);
-                    // console.log(newKey);
 
                     const tags = [];
 
@@ -273,21 +272,13 @@ function championParameterFilter() {
                               .toLowerCase()
                               .includes(searchTerm)
                           ) {
-                            // forEachChampionName(
-                            //   champion,
-                            //   data.data[champion].name
-                            // );
                             searchedNames.push(champion);
                           }
                         }
                       }
                     }
-                    // console.log(tags);
                   });
-                  // championAmount.innerText = emptyNames.length;
 
-                  // championAmount.innerText =
-                  //   document.querySelectorAll('.champion-card').length;
                   const allCards = document.querySelectorAll('.champion-card');
                   allCards.forEach((card) => {
                     allCardNames.push(card.childNodes[1].innerText);
@@ -339,7 +330,7 @@ function championParameterFilter() {
 
       if (activeCheck === false) {
         params.classList.add('hidden');
-        // loadAllChampions();
+
         const allCards = document.querySelectorAll('.champion-card');
         currentNames = [];
         let cardLength = 0;
@@ -556,7 +547,6 @@ function openAndPopulateChampionInfo(fetchedData) {
             championAbilityName[index + 1].innerText = spell.name;
           });
 
-          // populateChampionInfo(originalChampionKey, champion);
         });
     }
   });
